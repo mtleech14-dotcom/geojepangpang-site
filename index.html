@@ -3,548 +3,540 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>거제도팡팡 | 짜릿한 거제 수상레저</title>
-<meta name="description" content="거제도팡팡 - 제트스키투어, 물놀이 어트렉션, 수상레저, 패들보드. 짜릿한 거제를 만나보세요.">
+<title>거제도팡팡 | 짜릿한 거제! 수상레저 &amp; 제트스키 투어</title>
+<meta name="description" content="거제도팡팡 - 제트스키 투어, 수상 견인 놀이기구, 패들보드, 스노클링, 플로팅 해먹까지. 경상남도 거제시 일운면에서 즐기는 시원한 수상레저.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&family=Playfair+Display:ital,wght@0,600;0,700;1,600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Gothic+A1:wght@300;400;500;700;900&family=Anton&family=Black+Han+Sans&display=swap" rel="stylesheet">
 <style>
-  :root{
-    --navy:#0a3550;
-    --navy-deep:#062338;
-    --blue:#1c6fa8;
-    --blue-light:#4fa7d8;
-    --sky:#eaf5fb;
-    --sand:#f6f3ec;
-    --white:#ffffff;
-    --ink:#12293a;
-    --muted:#5b7484;
-    --gold:#c9a869;
-    --radius:18px;
-    --shadow:0 20px 50px rgba(10,53,80,0.14);
-  }
-  *{box-sizing:border-box;margin:0;padding:0;}
-  html{scroll-behavior:smooth;}
-  body{
-    font-family:'Noto Sans KR',-apple-system,BlinkMacSystemFont,'Malgun Gothic',sans-serif;
-    color:var(--ink);
-    background:var(--white);
-    line-height:1.65;
-    -webkit-font-smoothing:antialiased;
-    overflow-x:hidden;
-  }
-  img{max-width:100%;display:block;}
-  a{color:inherit;text-decoration:none;}
-  .serif{font-family:'Playfair Display',serif;}
-  .container{max-width:1180px;margin:0 auto;padding:0 28px;}
-  .eyebrow{
-    display:inline-flex;align-items:center;gap:8px;
-    font-size:13px;letter-spacing:0.24em;font-weight:600;
-    color:var(--blue);text-transform:uppercase;
-    margin-bottom:14px;
-  }
-  .eyebrow::before{content:"";width:26px;height:1px;background:var(--gold);}
-  h1,h2,h3{font-weight:700;color:var(--navy-deep);}
-  section{position:relative;}
-  .btn{
-    display:inline-flex;align-items:center;justify-content:center;gap:10px;
-    padding:15px 32px;border-radius:999px;font-weight:600;font-size:15px;
-    letter-spacing:0.02em;cursor:pointer;border:1px solid transparent;
-    transition:all .28s ease;white-space:nowrap;
-  }
-  .btn-primary{background:linear-gradient(135deg,var(--blue-light),var(--blue) 70%);color:#fff;box-shadow:0 14px 30px rgba(28,111,168,0.35);}
-  .btn-primary:hover{transform:translateY(-2px);box-shadow:0 18px 36px rgba(28,111,168,0.45);}
-  .btn-outline{background:rgba(255,255,255,0.08);border-color:rgba(255,255,255,0.55);color:#fff;backdrop-filter:blur(6px);}
-  .btn-outline:hover{background:rgba(255,255,255,0.18);}
-  .btn-dark{background:var(--navy);color:#fff;}
-  .btn-dark:hover{background:var(--navy-deep);}
+:root{
+  --navy:#001A2E;
+  --navy2:#00344F;
+  --blue:#0090D9;
+  --blue-light:#4fc3ec;
+  --bg-page:#F2F7F9;
+  --bg-alt:#DDE3E6;
+  --ink:#001A2E;
+  --muted:rgba(0,26,46,.65);
+  --muted-soft:rgba(0,26,46,.45);
+  --line:rgba(0,26,46,.12);
+  --radius:18px;
+  --naver:#03C75A;
+}
+*{box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{
+  margin:0;
+  font-family:"Gothic A1",system-ui,sans-serif;
+  color:var(--ink);
+  background:var(--bg-page);
+  -webkit-font-smoothing:antialiased;
+}
+a{color:inherit;text-decoration:none;}
+img{max-width:100%;display:block;}
+.headline{font-family:"Black Han Sans",sans-serif;font-weight:400;letter-spacing:-.02em;}
+.eyebrow{font-family:Anton,sans-serif;font-size:12px;letter-spacing:.24em;color:var(--blue);}
+.wrap{max-width:1240px;margin:0 auto;padding:0 44px;}
+.ph{
+  background:linear-gradient(135deg,var(--navy2),var(--blue));
+  display:flex;align-items:center;justify-content:center;
+  color:rgba(255,255,255,.75);font-size:13px;font-weight:500;
+  text-align:center;padding:12px;
+}
 
-  /* ===== Header ===== */
-  header{
-    position:fixed;top:0;left:0;right:0;z-index:100;
-    padding:18px 0;transition:all .3s ease;
-  }
-  header.scrolled{
-    background:rgba(10,53,80,0.92);backdrop-filter:blur(10px);
-    padding:12px 0;box-shadow:0 6px 24px rgba(6,35,56,0.25);
-  }
-  .nav-wrap{display:flex;align-items:center;justify-content:space-between;}
-  .logo{display:flex;align-items:center;gap:10px;color:#fff;font-size:20px;font-weight:700;letter-spacing:.01em;}
-  .logo span{color:var(--gold);}
-  .nav-links{display:flex;align-items:center;gap:38px;}
-  .nav-links a{color:rgba(255,255,255,0.92);font-size:15px;font-weight:500;position:relative;padding:4px 0;}
-  .nav-links a::after{content:"";position:absolute;left:0;bottom:-2px;width:0;height:2px;background:var(--gold);transition:width .25s ease;}
-  .nav-links a:hover::after{width:100%;}
-  .nav-cta{display:flex;align-items:center;gap:14px;}
-  .nav-tel{color:#fff;font-weight:700;font-size:15px;display:flex;align-items:center;gap:6px;}
-  .menu-btn{display:none;background:none;border:none;color:#fff;font-size:26px;cursor:pointer;}
+/* ---- header ---- */
+#siteHeader{
+  position:fixed;top:0;left:0;right:0;z-index:200;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:20px 44px;transition:background .3s ease, box-shadow .3s ease, padding .3s ease;
+}
+#siteHeader.scrolled{
+  background:rgba(255,255,255,.96);backdrop-filter:blur(10px);
+  box-shadow:0 4px 24px rgba(0,26,46,.08);padding:12px 44px;
+}
+.brand{display:flex;align-items:center;gap:12px;}
+.brand-mark{
+  width:38px;height:38px;border-radius:11px;background:var(--blue);
+  display:flex;align-items:center;justify-content:center;
+  font-family:Anton,sans-serif;font-size:19px;color:var(--navy);flex:none;
+}
+.brand-name{display:flex;flex-direction:column;line-height:1.15;}
+.brand-name b{font-weight:500;font-size:17px;letter-spacing:-.01em;color:#fff;transition:color .3s ease;}
+.brand-name span{font-family:Anton,sans-serif;font-size:10px;letter-spacing:.22em;color:var(--blue-light);}
+#siteHeader.scrolled .brand-name b{color:var(--navy);}
+.nav-desktop{display:flex;align-items:center;gap:34px;}
+.nav-links{display:flex;gap:26px;font-size:13.5px;font-weight:500;}
+.nav-links a{color:rgba(255,255,255,.9);transition:color .2s ease;}
+#siteHeader.scrolled .nav-links a{color:rgba(0,26,46,.75);}
+.nav-links a:hover{color:var(--blue-light);}
+.header-cta{
+  display:flex;align-items:center;gap:8px;background:var(--blue);color:#fff;
+  font-weight:500;font-size:13.5px;padding:12px 20px;border-radius:999px;
+  white-space:nowrap;transition:background .2s ease,color .2s ease;
+}
+.header-cta:hover{background:#fff;color:var(--navy);}
+.nav-toggle{display:none;background:none;border:none;cursor:pointer;padding:6px;}
+.nav-toggle span,.nav-toggle span::before,.nav-toggle span::after{
+  content:"";display:block;width:24px;height:2px;background:#fff;border-radius:2px;
+  transition:transform .25s ease,opacity .25s ease,background .25s ease;position:relative;
+}
+.nav-toggle span::before{position:absolute;top:-8px;}
+.nav-toggle span::after{position:absolute;top:8px;}
+#siteHeader.scrolled .nav-toggle span,
+#siteHeader.scrolled .nav-toggle span::before,
+#siteHeader.scrolled .nav-toggle span::after{background:var(--navy);}
 
-  /* ===== Hero ===== */
-  .hero{
-    min-height:100vh;position:relative;display:flex;align-items:center;
-    background:
-      radial-gradient(circle at 18% 20%, rgba(79,167,216,0.35), transparent 45%),
-      radial-gradient(circle at 85% 75%, rgba(201,168,105,0.18), transparent 50%),
-      linear-gradient(160deg, var(--navy-deep) 0%, var(--navy) 45%, var(--blue) 130%);
-    overflow:hidden;
-  }
-  .hero::before{
-    content:"";position:absolute;inset:0;
-    background-image:
-      radial-gradient(1px 1px at 20% 30%, rgba(255,255,255,.5) 0, transparent 50%),
-      radial-gradient(1px 1px at 70% 60%, rgba(255,255,255,.35) 0, transparent 50%),
-      radial-gradient(1.5px 1.5px at 40% 80%, rgba(255,255,255,.3) 0, transparent 50%),
-      radial-gradient(1px 1px at 90% 20%, rgba(255,255,255,.4) 0, transparent 50%);
-    opacity:.8;pointer-events:none;
-  }
-  .hero-waves{position:absolute;left:0;right:0;bottom:-2px;line-height:0;z-index:2;}
-  .hero-content{position:relative;z-index:3;padding-top:120px;padding-bottom:160px;width:100%;}
-  .hero-eyebrow{color:var(--gold);letter-spacing:.3em;font-size:13px;font-weight:600;text-transform:uppercase;margin-bottom:22px;display:flex;align-items:center;gap:10px;}
-  .hero-eyebrow::before{content:"";width:30px;height:1px;background:var(--gold);}
-  .hero h1{
-    font-family:'Playfair Display',serif;
-    color:#fff;font-size:clamp(40px,6vw,78px);line-height:1.12;font-weight:700;
-    max-width:820px;margin-bottom:26px;
-  }
-  .hero h1 em{font-style:italic;color:var(--gold);}
-  .hero p{color:rgba(255,255,255,0.82);font-size:18px;max-width:560px;margin-bottom:42px;font-weight:300;}
-  .hero-actions{display:flex;gap:16px;flex-wrap:wrap;margin-bottom:70px;}
-  .hero-stats{display:flex;gap:0;flex-wrap:wrap;border-top:1px solid rgba(255,255,255,0.18);padding-top:30px;max-width:640px;}
-  .hero-stat{padding-right:44px;margin-right:44px;border-right:1px solid rgba(255,255,255,0.18);}
-  .hero-stat:last-child{border-right:none;margin-right:0;padding-right:0;}
-  .hero-stat b{display:block;font-family:'Playfair Display',serif;color:#fff;font-size:30px;font-weight:700;}
-  .hero-stat span{color:rgba(255,255,255,0.65);font-size:13px;letter-spacing:.03em;}
+.mobile-nav{
+  position:fixed;inset:0;z-index:250;background:var(--navy);
+  display:flex;flex-direction:column;padding:26px 30px;
+  transform:translateX(100%);transition:transform .32s ease;
+}
+.mobile-nav.open{transform:translateX(0);}
+.mobile-nav-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:44px;}
+.mobile-nav-close{background:none;border:none;color:#fff;font-size:28px;cursor:pointer;line-height:1;}
+.mobile-nav a{color:#fff;font-size:22px;font-weight:500;padding:16px 0;border-bottom:1px solid rgba(255,255,255,.12);}
+.mobile-nav .header-cta{margin-top:30px;justify-content:center;}
 
-  /* ===== Section headings ===== */
-  .section-head{max-width:640px;margin-bottom:56px;}
-  .section-head.center{margin-left:auto;margin-right:auto;text-align:center;}
-  .section-head h2{font-family:'Playfair Display',serif;font-size:clamp(30px,4vw,44px);line-height:1.25;}
-  .section-head p{color:var(--muted);font-size:16px;margin-top:16px;font-weight:400;}
+/* ---- hero ---- */
+.hero{position:relative;height:100vh;min-height:640px;overflow:hidden;background:var(--navy);}
+.hero-bg{position:absolute;inset:0;align-items:flex-start !important;justify-content:flex-end !important;padding:90px 26px 0 0;font-size:11px !important;color:rgba(255,255,255,.4) !important;text-align:right !important;}
+.hero-overlay{
+  position:absolute;inset:0;
+  background:linear-gradient(180deg,rgba(0,26,46,.62),rgba(0,26,46,.18) 45%,rgba(0,26,46,.85));
+}
+.hero-content{position:absolute;left:0;right:0;bottom:170px;padding:0 44px;pointer-events:none;}
+.hero-badge{
+  display:inline-flex;align-items:center;gap:9px;background:rgba(0,26,46,.78);
+  border:1px solid var(--blue);padding:8px 15px;border-radius:999px;
+  font-size:12px;font-weight:500;color:var(--blue-light);
+}
+.hero h1{
+  margin:18px 0 0;font-size:clamp(38px,6.5vw,88px);line-height:1.05;color:#fff;max-width:900px;
+}
+.hero p{
+  margin:24px 0 0;max-width:560px;font-size:17px;font-weight:500;line-height:1.85;color:rgba(255,255,255,.85);
+}
+.hero-tags{
+  margin-top:14px;font-family:Anton,sans-serif;font-size:11.5px;letter-spacing:.18em;color:var(--blue-light);
+}
+.hero-bar{
+  position:absolute;left:0;right:0;bottom:0;min-height:96px;background:rgba(255,255,255,.97);
+  backdrop-filter:blur(8px);display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;
+  padding:16px 44px;gap:16px;
+}
+.hero-bar-info{display:flex;align-items:center;gap:30px;flex-wrap:wrap;}
+.hero-bar-label{font-size:10.5px;font-weight:500;letter-spacing:.14em;color:var(--muted-soft);}
+.hero-bar-phone{margin-top:3px;font-family:Anton,sans-serif;font-size:25px;letter-spacing:.02em;color:var(--navy);}
+.hero-bar-divider{width:1px;height:40px;background:var(--line);}
+.hero-bar-note{font-size:12.5px;font-weight:500;line-height:1.6;color:var(--muted);}
+.btn-call{
+  display:inline-flex;align-items:center;gap:8px;background:var(--navy);color:#fff;
+  font-weight:500;font-size:14px;padding:15px 26px;border-radius:12px;transition:background .2s ease;
+}
+.btn-call:hover{background:var(--navy2);}
 
-  /* ===== About ===== */
-  .about{padding:130px 0 110px;background:var(--white);}
-  .about-grid{display:grid;grid-template-columns:1fr 1fr;gap:70px;align-items:center;}
-  .about-visual{position:relative;border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow);aspect-ratio:4/5;
-    background:linear-gradient(150deg,#0a3550,#1c6fa8 55%,#7fc2e8);}
-  .about-visual::after{
-    content:"";position:absolute;inset:0;
-    background:
-      radial-gradient(circle at 30% 25%, rgba(255,255,255,.28), transparent 40%),
-      radial-gradient(circle at 75% 70%, rgba(255,255,255,.18), transparent 45%);
-  }
-  .about-visual .wave-icon{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;}
-  .about-badge{
-    position:absolute;left:-26px;bottom:34px;background:#fff;padding:22px 26px;border-radius:14px;
-    box-shadow:0 16px 34px rgba(10,53,80,0.2);display:flex;gap:16px;align-items:center;max-width:250px;
-  }
-  .about-badge b{display:block;font-family:'Playfair Display',serif;font-size:26px;color:var(--navy-deep);}
-  .about-badge span{font-size:12.5px;color:var(--muted);}
-  .about-copy p{color:var(--muted);font-size:16px;margin-bottom:16px;}
-  .about-list{margin-top:30px;display:grid;gap:16px;}
-  .about-list li{display:flex;gap:14px;align-items:flex-start;font-size:15px;color:var(--ink);}
-  .about-list .chk{
-    flex:none;width:26px;height:26px;border-radius:50%;background:var(--sky);color:var(--blue);
-    display:flex;align-items:center;justify-content:center;font-size:14px;margin-top:1px;
-  }
+/* ---- marquee ---- */
+.marquee{background:var(--navy);padding:12px 0;overflow:hidden;}
+.marquee-track{display:flex;width:200%;animation:nx-marquee 26s linear infinite;}
+.marquee-set{display:flex;gap:40px;width:50%;flex:none;white-space:nowrap;}
+.marquee-set span{font-family:Anton,sans-serif;font-size:14px;letter-spacing:.16em;color:var(--blue-light);}
+@keyframes nx-marquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}
 
-  /* ===== Services ===== */
-  .services{padding:110px 0;background:var(--sky);position:relative;}
-  .service-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:26px;}
-  .service-card{
-    background:#fff;border-radius:var(--radius);padding:36px 28px;box-shadow:0 12px 30px rgba(10,53,80,0.08);
-    transition:transform .3s ease, box-shadow .3s ease;position:relative;overflow:hidden;
-  }
-  .service-card:hover{transform:translateY(-8px);box-shadow:0 22px 44px rgba(10,53,80,0.16);}
-  .service-num{position:absolute;top:22px;right:26px;font-family:'Playfair Display',serif;font-size:14px;color:#c7d8e2;font-weight:700;}
-  .service-icon{
-    width:62px;height:62px;border-radius:16px;background:linear-gradient(135deg,var(--blue-light),var(--blue));
-    display:flex;align-items:center;justify-content:center;margin-bottom:26px;color:#fff;
-  }
-  .service-card h3{font-size:19px;margin-bottom:10px;color:var(--navy-deep);}
-  .service-card p{font-size:14px;color:var(--muted);}
+/* ---- programs ---- */
+.programs{padding:96px 0;}
+.section-head{display:flex;align-items:flex-end;justify-content:space-between;flex-wrap:wrap;gap:20px;}
+.section-head h2{margin:10px 0 0;font-size:clamp(30px,4vw,46px);}
+.section-head p{margin:0;max-width:320px;font-size:13px;line-height:1.9;color:var(--muted);}
 
-  /* ===== Why us ===== */
-  .why{padding:110px 0;background:var(--navy-deep);color:#fff;position:relative;overflow:hidden;}
-  .why::before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 80% 20%, rgba(28,111,168,0.35), transparent 55%);}
-  .why-grid{display:grid;grid-template-columns:1fr 1fr;gap:60px;position:relative;z-index:1;align-items:center;}
-  .why .section-head h2{color:#fff;}
-  .why .section-head p{color:rgba(255,255,255,0.65);}
-  .why-features{display:grid;gap:28px;}
-  .why-feature{display:flex;gap:18px;}
-  .why-feature .ico{
-    flex:none;width:50px;height:50px;border-radius:14px;background:rgba(255,255,255,0.08);
-    border:1px solid rgba(255,255,255,0.14);display:flex;align-items:center;justify-content:center;color:var(--gold);
-  }
-  .why-feature h4{font-size:16.5px;margin-bottom:6px;color:#fff;}
-  .why-feature p{font-size:14px;color:rgba(255,255,255,0.62);}
+.chip-row{display:flex;gap:10px;margin-top:34px;flex-wrap:wrap;}
+.chip{
+  font-size:14px;font-weight:500;padding:14px 24px;border-radius:999px;cursor:pointer;
+  background:transparent;color:rgba(0,26,46,.72);border:1.5px solid var(--line);
+  transition:background .2s ease,color .2s ease,border-color .2s ease;
+}
+.chip.active{background:var(--navy);color:#fff;border-color:var(--navy);}
 
-  /* ===== Gallery ===== */
-  .gallery{padding:110px 0;background:#fff;}
-  .gallery-grid{display:grid;grid-template-columns:repeat(3,1fr);grid-auto-rows:200px;gap:14px;}
-  .gallery-grid .g-item{border-radius:14px;position:relative;overflow:hidden;}
-  .gallery-grid .g-item::after{content:"";position:absolute;inset:0;opacity:.9;}
-  .g1{grid-column:span 2;grid-row:span 2;}
-  .g2{grid-column:span 1;grid-row:span 1;}
-  .g3{grid-column:span 1;grid-row:span 1;}
-  .g4{grid-column:span 1;grid-row:span 1;}
-  .g5{grid-column:span 2;grid-row:span 1;}
-  .grad1{background:linear-gradient(135deg,#0a3550,#4fa7d8);}
-  .grad2{background:linear-gradient(135deg,#1c6fa8,#8fd0ef);}
-  .grad3{background:linear-gradient(135deg,#062338,#1c6fa8);}
-  .grad4{background:linear-gradient(135deg,#4fa7d8,#c9e6f5);}
-  .grad5{background:linear-gradient(135deg,#0a3550,#1c6fa8,#c9a869);}
-  .g-item .g-label{position:absolute;left:16px;bottom:14px;color:#fff;font-size:13px;font-weight:600;letter-spacing:.02em;z-index:2;text-shadow:0 2px 10px rgba(0,0,0,.25);}
-  .g-note{margin-top:22px;font-size:13px;color:var(--muted);text-align:center;}
+.program-card{
+  display:grid;grid-template-columns:1.15fr 1fr;margin-top:26px;background:#fff;
+  border-radius:20px;overflow:hidden;box-shadow:0 10px 40px rgba(0,26,46,.1);
+}
+.program-photo{position:relative;min-height:420px;}
+.program-photo .ph{position:absolute;inset:0;font-size:15px;}
+.program-info{padding:48px 46px;display:flex;flex-direction:column;}
+.program-info h3{margin:12px 0 0;font-size:clamp(28px,3vw,40px);}
+.program-info p{margin:18px 0 0;font-size:14.5px;line-height:1.95;color:var(--muted);}
+.program-tags{display:flex;gap:8px;margin-top:24px;flex-wrap:wrap;}
+.program-tags span{font-size:12px;font-weight:500;color:var(--navy2);background:#DCF4FA;padding:8px 14px;border-radius:8px;}
+.program-foot{
+  margin-top:auto;padding-top:32px;border-top:1px solid var(--line);
+  display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;
+}
+.price-note{font-size:11px;font-weight:500;letter-spacing:.12em;color:var(--muted-soft);}
+.price-note b{display:block;margin-top:4px;font-family:Anton,sans-serif;font-size:22px;letter-spacing:.04em;color:var(--navy);}
+.btn-dark{
+  background:var(--navy);color:#fff;font-weight:500;font-size:14px;padding:16px 28px;
+  border-radius:12px;cursor:pointer;transition:background .2s ease;border:none;font-family:inherit;
+}
+.btn-dark:hover{background:var(--blue);}
 
-  /* ===== CTA band ===== */
-  .cta-band{padding:90px 0;background:linear-gradient(120deg,var(--blue),var(--navy));}
-  .cta-band .container{display:flex;align-items:center;justify-content:space-between;gap:30px;flex-wrap:wrap;}
-  .cta-band h3{font-family:'Playfair Display',serif;color:#fff;font-size:30px;max-width:520px;}
-  .cta-band p{color:rgba(255,255,255,0.75);margin-top:10px;font-size:15px;}
-  .cta-actions{display:flex;gap:14px;flex-wrap:wrap;}
+/* ---- visit ---- */
+.visit{background:#fff;padding:96px 0;}
+.visit-grid{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center;}
+.visit h2{margin:10px 0 20px;font-size:clamp(28px,3.4vw,40px);}
+.visit > .wrap > div:first-child p{margin:0 0 28px;font-size:14.5px;line-height:1.95;color:var(--muted);}
+.map-card{display:flex;gap:22px;align-items:center;padding:24px;background:var(--bg-page);border-radius:16px;}
+.map-icon{
+  width:100px;height:100px;flex:none;border-radius:12px;background:var(--navy);
+  display:flex;align-items:center;justify-content:center;color:var(--blue-light);
+  font-family:Anton,sans-serif;font-size:13px;letter-spacing:.1em;text-align:center;line-height:1.6;
+}
+.map-card-title{font-size:15px;font-weight:500;color:var(--navy);}
+.map-card-sub{margin-top:8px;font-size:12.5px;line-height:1.8;color:var(--muted);}
+.map-card-link{display:inline-block;margin-top:12px;background:var(--naver);color:#fff;font-weight:500;font-size:12.5px;padding:11px 18px;border-radius:9px;}
+.info-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin-top:22px;}
+.info-cell{padding:18px 20px;border:1px solid var(--line);border-radius:14px;}
+.info-cell-label{font-size:11px;font-weight:500;letter-spacing:.12em;color:var(--muted-soft);}
+.info-cell-value{margin-top:7px;font-size:13.5px;color:var(--navy);}
+.visit-photo{position:relative;height:440px;border-radius:20px;overflow:hidden;}
 
-  /* ===== Contact ===== */
-  .contact{padding:110px 0;background:var(--sand);}
-  .contact-grid{display:grid;grid-template-columns:1.05fr 0.95fr;gap:60px;}
-  .contact-card{background:#fff;border-radius:var(--radius);padding:44px;box-shadow:var(--shadow);}
-  .contact-row{display:flex;gap:18px;align-items:flex-start;padding:20px 0;border-bottom:1px solid #eee;}
-  .contact-row:last-child{border-bottom:none;}
-  .contact-row .ico{
-    flex:none;width:46px;height:46px;border-radius:12px;background:var(--sky);color:var(--blue);
-    display:flex;align-items:center;justify-content:center;
-  }
-  .contact-row b{display:block;font-size:14px;color:var(--muted);margin-bottom:3px;font-weight:500;}
-  .contact-row span{font-size:17px;font-weight:700;color:var(--navy-deep);}
-  .map-box{
-    border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow);
-    background:
-      linear-gradient(rgba(10,53,80,.55),rgba(10,53,80,.55)),
-      repeating-linear-gradient(45deg,#dce8ee 0 2px, #eaf3f7 2px 40px);
-    min-height:340px;display:flex;align-items:center;justify-content:center;color:#fff;text-align:center;padding:30px;
-  }
-  .map-box .map-inner{max-width:280px;}
-  .map-box b{display:block;font-size:16px;margin-bottom:6px;}
-  .map-box span{font-size:13px;color:rgba(255,255,255,0.8);}
+/* ---- gallery ---- */
+.gallery{padding:96px 0;}
+.gallery-grid{display:grid;grid-template-columns:repeat(3,1fr);grid-auto-rows:200px;gap:14px;margin-top:34px;}
+.gallery-grid .ph{border-radius:14px;font-size:12.5px;}
+.g1{grid-column:span 2;grid-row:span 2;}
+.g2{grid-column:span 1;grid-row:span 1;}
+.g3{grid-column:span 1;grid-row:span 1;}
+.g4{grid-column:span 1;grid-row:span 1;}
+.g5{grid-column:span 2;grid-row:span 1;}
 
-  /* ===== Footer ===== */
-  footer{background:var(--navy-deep);color:rgba(255,255,255,0.6);padding:50px 0 30px;}
-  .footer-top{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:24px;padding-bottom:30px;border-bottom:1px solid rgba(255,255,255,0.1);margin-bottom:26px;}
-  .footer-logo{color:#fff;font-size:19px;font-weight:700;}
-  .footer-logo span{color:var(--gold);}
-  .footer-links{display:flex;gap:26px;flex-wrap:wrap;font-size:14px;}
-  .footer-bottom{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;font-size:12.5px;}
+/* ---- reviews (honest placeholder, no fabricated testimonials) ---- */
+.reviews{background:var(--bg-page);padding:80px 0;}
+.review-empty{
+  margin-top:26px;background:#fff;border-radius:20px;padding:56px 40px;text-align:center;
+}
+.review-empty .stars{font-size:20px;color:#FFB300;letter-spacing:4px;}
+.review-empty p{margin:16px auto 0;max-width:440px;font-size:14.5px;line-height:1.9;color:var(--muted);}
+.review-empty a{
+  display:inline-block;margin-top:20px;font-size:13px;font-weight:500;color:var(--blue);
+  border-bottom:1.5px solid var(--blue);padding-bottom:2px;
+}
 
-  /* floating call button */
-  .float-call{
-    position:fixed;right:26px;bottom:26px;z-index:90;
-    width:60px;height:60px;border-radius:50%;background:linear-gradient(135deg,var(--blue-light),var(--blue));
-    display:flex;align-items:center;justify-content:center;color:#fff;box-shadow:0 14px 30px rgba(28,111,168,0.45);
-    animation:pulse 2.4s infinite;
-    opacity:0;transform:translateY(14px) scale(.9);pointer-events:none;
-    transition:opacity .3s ease, transform .3s ease;
-  }
-  .float-call.visible{opacity:1;transform:translateY(0) scale(1);pointer-events:auto;}
-  @keyframes pulse{0%{box-shadow:0 0 0 0 rgba(28,111,168,0.45)}70%{box-shadow:0 0 0 16px rgba(28,111,168,0)}100%{box-shadow:0 0 0 0 rgba(28,111,168,0)}}
+/* ---- cta band ---- */
+.cta-band{background:var(--blue);padding:66px 44px;}
+.cta-band .wrap{
+  padding:0;display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap;
+}
+.cta-band h2{margin:0;font-size:clamp(26px,3.6vw,44px);color:var(--navy);}
+.cta-band p{margin:12px 0 0;font-size:15px;font-weight:500;color:rgba(0,26,46,.72);}
+.cta-actions{display:flex;gap:12px;flex-wrap:wrap;}
+.cta-phone{
+  background:var(--navy);color:#fff;font-family:Anton,sans-serif;font-size:20px;letter-spacing:.04em;
+  padding:22px 30px;border-radius:14px;transition:background .2s ease;
+}
+.cta-phone:hover{background:var(--navy2);}
 
-  /* reveal animation */
-  .reveal{opacity:0;transform:translateY(24px);transition:opacity .7s ease, transform .7s ease;}
-  .reveal.in{opacity:1;transform:translateY(0);}
+/* ---- footer ---- */
+footer{background:var(--navy);padding:44px;}
+footer .wrap{padding:0;display:flex;justify-content:space-between;align-items:flex-end;gap:24px;flex-wrap:wrap;}
+.footer-brand{font-weight:500;font-size:15px;color:#fff;}
+.footer-brand span{font-family:Anton,sans-serif;font-size:11px;letter-spacing:.2em;color:var(--blue-light);margin-left:8px;}
+.footer-meta{margin-top:14px;font-size:11.5px;line-height:1.9;color:rgba(255,255,255,.45);}
+.footer-links{display:flex;gap:22px;font-size:11.5px;color:rgba(255,255,255,.55);flex-wrap:wrap;}
 
-  /* ===== Responsive ===== */
-  @media(max-width:980px){
-    .about-grid,.why-grid,.contact-grid{grid-template-columns:1fr;}
-    .service-grid{grid-template-columns:repeat(2,1fr);}
-    .gallery-grid{grid-template-columns:repeat(2,1fr);grid-auto-rows:160px;}
-    .g1,.g2,.g3,.g4,.g5{grid-column:span 1;grid-row:span 1;}
-    .nav-links{display:none;}
-    .menu-btn{display:block;}
-    .nav-tel span.txt{display:none;}
-  }
-  @media(max-width:600px){
-    .service-grid{grid-template-columns:1fr;}
-    .hero-stats{gap:0;}
-    .hero-stat{padding-right:24px;margin-right:24px;}
-    .cta-band .container{flex-direction:column;align-items:flex-start;}
-    .about-badge{left:14px;right:14px;bottom:16px;max-width:none;padding:16px 18px;}
-  }
+/* ---- mobile fixed bar ---- */
+.mobile-bar{
+  position:fixed;left:0;right:0;bottom:0;z-index:150;background:#fff;
+  border-top:1px solid var(--line);padding:12px 16px calc(12px + env(safe-area-inset-bottom));
+  display:none;box-shadow:0 -6px 20px rgba(0,26,46,.08);
+}
+.mobile-bar a{
+  display:flex;align-items:center;justify-content:center;background:var(--navy);color:#fff;
+  font-weight:500;font-size:15px;padding:15px 0;border-radius:12px;
+}
 
-  /* mobile nav drawer */
-  .mobile-nav{
-    position:fixed;inset:0;background:var(--navy-deep);z-index:200;
-    display:flex;flex-direction:column;align-items:center;justify-content:center;gap:30px;
-    transform:translateY(-100%);transition:transform .35s ease;
-  }
-  .mobile-nav.open{transform:translateY(0);}
-  .mobile-nav a{color:#fff;font-size:22px;font-weight:600;}
-  .mobile-nav .close-btn{position:absolute;top:26px;right:28px;font-size:30px;color:#fff;background:none;border:none;cursor:pointer;}
+/* ---- reveal ---- */
+.reveal{opacity:0;transform:translateY(24px);transition:opacity .7s ease,transform .7s ease;}
+.reveal.in{opacity:1;transform:translateY(0);}
+
+/* ---- responsive ---- */
+@media(max-width:980px){
+  .wrap{padding:0 22px;}
+  #siteHeader{padding:16px 20px;}
+  .nav-desktop{display:none;}
+  .nav-toggle{display:block;}
+  .hero{height:auto;min-height:100vh;padding-bottom:210px;}
+  .hero-content{position:static;padding:150px 20px 0;pointer-events:auto;}
+  .hero h1{max-width:100%;}
+  .hero-bar{position:static;flex-direction:column;align-items:flex-start;margin-top:36px;}
+  .hero-bar-info{flex-direction:column;align-items:flex-start;gap:14px;}
+  .hero-bar-divider{display:none;}
+  .btn-call{width:100%;justify-content:center;}
+  .programs,.visit,.gallery{padding:64px 0;}
+  .program-card{grid-template-columns:1fr;}
+  .program-photo{min-height:220px;}
+  .program-info{padding:30px 26px;}
+  .visit-grid{grid-template-columns:1fr;}
+  .visit-photo{height:260px;}
+  .gallery-grid{grid-template-columns:repeat(2,1fr);grid-auto-rows:150px;}
+  .g1,.g2,.g3,.g4,.g5{grid-column:span 1;grid-row:span 1;}
+  .cta-band{padding:44px 22px;}
+  footer{padding:36px 22px 100px;}
+  .mobile-bar{display:block;}
+}
+@media(max-width:600px){
+  .wrap{padding:0 18px;}
+  .hero-content{padding:130px 18px 0;}
+  .info-grid{grid-template-columns:1fr;}
+}
 </style>
 </head>
 <body>
 
 <header id="siteHeader">
-  <div class="container nav-wrap">
-    <a href="#top" class="logo">거제도<span>팡팡</span></a>
-    <nav class="nav-links">
-      <a href="#about">소개</a>
-      <a href="#services">서비스</a>
+  <a class="brand" href="#top">
+    <span class="brand-mark">거</span>
+    <span class="brand-name"><b>거제도팡팡</b><span>GEOJEPANGPANG</span></span>
+  </a>
+  <nav class="nav-desktop">
+    <div class="nav-links">
+      <a href="#programs">프로그램</a>
+      <a href="#visit">시설·오시는 길</a>
       <a href="#gallery">갤러리</a>
-      <a href="#contact">오시는 길</a>
-    </nav>
-    <div class="nav-cta">
-      <a href="tel:01097596665" class="nav-tel">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-        <span class="txt">010-9759-6665</span>
-      </a>
-      <a href="#contact" class="btn btn-primary" style="padding:12px 24px;font-size:14px;">예약 문의</a>
-      <button class="menu-btn" id="menuBtn" aria-label="메뉴 열기">&#9776;</button>
+      <a href="#reviews">후기</a>
+      <a href="#contact">단체 문의</a>
     </div>
-  </div>
+    <a class="header-cta" href="tel:01097596665">📞 전화 문의</a>
+  </nav>
+  <button class="nav-toggle" id="navToggle" aria-label="메뉴 열기"><span></span></button>
 </header>
 
 <div class="mobile-nav" id="mobileNav">
-  <button class="close-btn" id="closeBtn">&times;</button>
-  <a href="#about">소개</a>
-  <a href="#services">서비스</a>
+  <div class="mobile-nav-top">
+    <span class="brand-name"><b>거제도팡팡</b><span>GEOJEPANGPANG</span></span>
+    <button class="mobile-nav-close" id="mobileNavClose" aria-label="메뉴 닫기">&times;</button>
+  </div>
+  <a href="#programs">프로그램</a>
+  <a href="#visit">시설·오시는 길</a>
   <a href="#gallery">갤러리</a>
-  <a href="#contact">오시는 길</a>
-  <a href="tel:01097596665" class="btn btn-primary">010-9759-6665</a>
+  <a href="#reviews">후기</a>
+  <a href="#contact">단체 문의</a>
+  <a class="header-cta" href="tel:01097596665">📞 전화 문의</a>
 </div>
 
 <section class="hero" id="top">
-  <div class="container hero-content">
-    <div class="hero-eyebrow">GEOJE ISLAND WATER LEISURE</div>
-    <h1>바다가 허락한 하루,<br><em>짜릿한 거제</em>를 만나다</h1>
-    <p>제트스키투어부터 패들보드까지 — 거제의 푸른 바다 위에서 즐기는 프리미엄 수상레저, 거제도팡팡과 함께 하세요.</p>
-    <div class="hero-actions">
-      <a href="#contact" class="btn btn-primary">예약 문의하기</a>
-      <a href="#services" class="btn btn-outline">서비스 둘러보기</a>
-    </div>
-    <div class="hero-stats">
-      <div class="hero-stat"><b>4+</b><span>수상레저 프로그램</span></div>
-      <div class="hero-stat"><b>100%</b><span>전문 강사 동행</span></div>
-      <div class="hero-stat"><b>거제</b><span>청정 바다 위 투어</span></div>
-    </div>
+  <div class="hero-bg ph">거제도팡팡 히어로 사진 (제트스키/바다 전경)</div>
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <span class="hero-badge">● 오늘 출항 가능 · 예약 문의 환영</span>
+    <h1 class="headline">짜릿한 거제!<br>물 위에서 제일<br>시원한 하루</h1>
+    <p>제트스키부터 바다 위 플로팅 해먹까지. 초보자·아이 동반 가족·단체 워크샵 모두 안전요원과 함께 즐기는 거제 수상레저.</p>
+    <div class="hero-tags">JET SKI · TOWABLES · PADDLE BOARD · SNORKELING · FLOATING HAMMOCK</div>
   </div>
-  <div class="hero-waves">
-    <svg viewBox="0 0 1440 110" preserveAspectRatio="none" style="width:100%;height:90px;display:block;">
-      <path fill="#ffffff" d="M0,64L60,58.7C120,53,240,43,360,48C480,53,600,75,720,80C840,85,960,75,1080,64C1200,53,1320,43,1380,37.3L1440,32L1440,110L0,110Z"></path>
-    </svg>
-  </div>
-</section>
-
-<section class="about" id="about">
-  <div class="container about-grid">
-    <div class="reveal about-visual">
-      <div class="wave-icon">
-        <svg width="120" height="120" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.2" opacity="0.85">
-          <path d="M2 6c1.5-1 3-1 4.5 0s3 1 4.5 0 3-1 4.5 0 3 1 4.5 0" stroke-linecap="round"/>
-          <path d="M2 12c1.5-1 3-1 4.5 0s3 1 4.5 0 3-1 4.5 0 3 1 4.5 0" stroke-linecap="round"/>
-          <path d="M2 18c1.5-1 3-1 4.5 0s3 1 4.5 0 3-1 4.5 0 3 1 4.5 0" stroke-linecap="round"/>
-        </svg>
+  <div class="hero-bar">
+    <div class="hero-bar-info">
+      <div>
+        <div class="hero-bar-label">RESERVATION · 예약 문의</div>
+        <div class="hero-bar-phone">010-9759-6665</div>
       </div>
-      <div class="about-badge">
-        <b>Since 2026</b>
-        <span>거제 바다를 가장 잘 아는 로컬 수상레저 팀</span>
-      </div>
+      <div class="hero-bar-divider"></div>
+      <div class="hero-bar-note">경상남도 거제시 일운면 거제대로 2660<br>운영 시간·당일 일정은 전화로 문의해 주세요</div>
     </div>
-    <div class="reveal about-copy">
-      <div class="eyebrow">ABOUT US</div>
-      <h2 class="serif" style="font-size:clamp(28px,3.4vw,38px);margin-bottom:20px;">거제도팡팡은<br>이런 팀입니다</h2>
-      <p>거제도팡팡은 거제의 맑고 잔잔한 바다 위에서 제트스키투어, 물놀이 어트렉션, 수상레저, 패들보드까지 — 남녀노소 누구나 짜릿하고 안전하게 즐길 수 있는 수상레저 프로그램을 운영합니다.</p>
-      <p>초보자부터 익스트림을 즐기는 분들까지, 전문 강사진이 처음부터 끝까지 함께하며 오직 이 순간, 거제 바다에서만 느낄 수 있는 특별한 경험을 선사합니다.</p>
-      <ul class="about-list">
-        <li><span class="chk">✓</span> 숙련된 전문 강사진의 안전한 동행 및 밀착 지도</li>
-        <li><span class="chk">✓</span> 초보자도 즐길 수 있는 눈높이 맞춤 프로그램</li>
-        <li><span class="chk">✓</span> 거제의 청정 해역에서 즐기는 프리미엄 투어</li>
-      </ul>
-    </div>
+    <a class="btn-call" href="tel:01097596665">📞 지금 전화하기</a>
   </div>
 </section>
 
-<section class="services" id="services">
-  <div class="container">
-    <div class="section-head center reveal">
-      <div class="eyebrow" style="justify-content:center;">OUR PROGRAMS</div>
-      <h2>거제도팡팡의 수상레저 프로그램</h2>
-      <p>바다를 즐기는 방법은 다양합니다. 취향에 맞는 프로그램을 선택해 보세요.</p>
+<div class="marquee">
+  <div class="marquee-track">
+    <div class="marquee-set">
+      <span>안전요원 상시 배치</span><span>· 장비·구명조끼 전부 포함 ·</span><span>초보 강습 무료</span><span>· 주차 무료 ·</span><span>단체 40인까지</span><span>· 짜릿한 거제! ·</span>
     </div>
-    <div class="service-grid">
-      <div class="service-card reveal">
-        <div class="service-num">01</div>
-        <div class="service-icon">
-          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><path d="M2 17c1.5 1 3 1 4.5 0s3-1 4.5 0 3 1 4.5 0 3-1 4.5 0"/><path d="M4 14l3-9 8 3-2 3"/><circle cx="17" cy="13" r="2"/></svg>
-        </div>
-        <h3>제트스키투어</h3>
-        <p>거제 앞바다를 가르는 스릴 만점 제트스키 투어. 전문 강사와 함께 안전하게 즐기는 스피드감.</p>
-      </div>
-      <div class="service-card reveal">
-        <div class="service-num">02</div>
-        <div class="service-icon">
-          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><path d="M12 2v20"/><path d="M6 8l6-6 6 6"/><path d="M4 16c1.5 1 3 1 4.5 0s3-1 4.5 0 3 1 4.5 0 3-1 4.5 0"/></svg>
-        </div>
-        <h3>물놀이 어트렉션</h3>
-        <p>바나나보트, 도넛보트 등 온 가족이 함께 즐기는 신나는 워터 어트렉션 프로그램.</p>
-      </div>
-      <div class="service-card reveal">
-        <div class="service-num">03</div>
-        <div class="service-icon">
-          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M8 12h8M12 8v8"/></svg>
-        </div>
-        <h3>수상레저</h3>
-        <p>웨이크보드, 튜빙 등 다양한 수상레저를 한 곳에서. 취향대로 골라 즐기는 바다 액티비티.</p>
-      </div>
-      <div class="service-card reveal">
-        <div class="service-num">04</div>
-        <div class="service-icon">
-          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><rect x="3" y="10" width="18" height="4" rx="2"/><path d="M12 14v7M9 21h6"/></svg>
-        </div>
-        <h3>패들보드</h3>
-        <p>잔잔한 거제 바다 위에서 여유롭게 즐기는 패들보드. 힐링이 필요한 순간에 추천.</p>
-      </div>
+    <div class="marquee-set" aria-hidden="true">
+      <span>안전요원 상시 배치</span><span>· 장비·구명조끼 전부 포함 ·</span><span>초보 강습 무료</span><span>· 주차 무료 ·</span><span>단체 40인까지</span><span>· 짜릿한 거제! ·</span>
     </div>
   </div>
-</section>
+</div>
 
-<section class="why">
-  <div class="container why-grid">
-    <div class="reveal">
-      <div class="section-head">
-        <div class="eyebrow">WHY GEOJEPANGPANG</div>
-        <h2>왜 거제도팡팡을<br>선택해야 할까요</h2>
-        <p>안전과 즐거움, 두 마리 토끼를 모두 잡은 거제도팡팡의 약속입니다.</p>
+<section class="programs reveal" id="programs">
+  <div class="wrap">
+    <div class="section-head">
+      <div>
+        <div class="eyebrow">PROGRAMS</div>
+        <h2 class="headline">다섯 가지 즐기는 법</h2>
       </div>
+      <p>전 프로그램 장비·구명조끼·보험 포함. 처음이면 안전요원이 붙어 강습부터 시작합니다.</p>
     </div>
-    <div class="why-features reveal">
-      <div class="why-feature">
-        <div class="ico"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l8 4v6c0 5-3.5 8.5-8 10-4.5-1.5-8-5-8-10V6l8-4z"/></svg></div>
-        <div><h4>철저한 안전 관리</h4><p>안전장비 지급과 사전 안전교육으로 처음이어도 안심하고 즐길 수 있습니다.</p></div>
-      </div>
-      <div class="why-feature">
-        <div class="ico"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-6 8-6s8 2 8 6"/></svg></div>
-        <div><h4>전문 강사진</h4><p>풍부한 경험의 강사진이 예약부터 투어 종료까지 밀착 케어합니다.</p></div>
-      </div>
-      <div class="why-feature">
-        <div class="ico"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12h18M3 6h18M3 18h18"/></svg></div>
-        <div><h4>합리적인 프로그램 구성</h4><p>인원과 취향에 맞춰 원하는 프로그램만 골라 조합할 수 있습니다.</p></div>
-      </div>
-    </div>
-  </div>
-</section>
 
-<section class="gallery" id="gallery">
-  <div class="container">
-    <div class="section-head center reveal">
-      <div class="eyebrow" style="justify-content:center;">GALLERY</div>
-      <h2>거제도팡팡의 순간들</h2>
-      <p>추후 실제 투어 사진으로 교체될 예정입니다.</p>
-    </div>
-    <div class="gallery-grid reveal">
-      <div class="g-item g1 grad1"><span class="g-label">제트스키투어</span></div>
-      <div class="g-item g2 grad2"><span class="g-label">물놀이 어트렉션</span></div>
-      <div class="g-item g3 grad3"><span class="g-label">패들보드</span></div>
-      <div class="g-item g4 grad4"></div>
-      <div class="g-item g5 grad5"><span class="g-label">수상레저</span></div>
-    </div>
-    <p class="g-note">* 위 이미지는 임시 플레이스홀더입니다. 실제 사진을 보내주시면 교체해 드립니다.</p>
-  </div>
-</section>
+    <div class="chip-row" id="chipRow"></div>
 
-<section class="cta-band">
-  <div class="container">
-    <div class="reveal">
-      <h3>이번 여름, 거제 바다에서<br>가장 짜릿한 순간을 만드세요</h3>
-      <p>전화 한 통이면 예약부터 일정 안내까지 한 번에 도와드립니다.</p>
-    </div>
-    <div class="cta-actions reveal">
-      <a href="tel:01097596665" class="btn btn-dark">📞 010-9759-6665</a>
-      <a href="#contact" class="btn btn-outline">문의 남기기</a>
-    </div>
-  </div>
-</section>
-
-<section class="contact" id="contact">
-  <div class="container">
-    <div class="section-head reveal">
-      <div class="eyebrow">CONTACT</div>
-      <h2>오시는 길 &amp; 문의</h2>
-      <p>거제도팡팡에 대해 궁금하신 점은 언제든 편하게 연락 주세요.</p>
-    </div>
-    <div class="contact-grid">
-      <div class="contact-card reveal">
-        <div class="contact-row">
-          <div class="ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg></div>
-          <div><b>전화 문의</b><span>010-9759-6665</span></div>
-        </div>
-        <div class="contact-row">
-          <div class="ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 6-9 12-9 12s-9-6-9-12a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></div>
-          <div><b>위치</b><span>경상남도 거제시 일운면 거제대로 2660</span></div>
-        </div>
-        <div class="contact-row">
-          <div class="ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg></div>
-          <div><b>운영 시간</b><span>매일 09:00 - 18:00 (시즌별 변동)</span></div>
-        </div>
-        <a href="tel:01097596665" class="btn btn-primary" style="width:100%;margin-top:26px;">전화로 바로 예약하기</a>
-      </div>
-      <div class="map-box reveal">
-        <div class="map-inner">
-          <b>경상남도 거제시 일운면 거제대로 2660</b>
-          <span>카카오맵/네이버지도 연동 위치가 이 영역에 삽입될 예정입니다.</span>
+    <div class="program-card">
+      <div class="program-photo"><div class="ph" id="programPhoto">선택된 프로그램 사진</div></div>
+      <div class="program-info">
+        <div class="eyebrow" id="programEn">JET SKI TOUR</div>
+        <h3 id="programName">제트스키</h3>
+        <p id="programDesc"></p>
+        <div class="program-tags" id="programTags"></div>
+        <div class="program-foot">
+          <div class="price-note">이용 요금<b>전화 문의</b></div>
+          <a class="btn-dark" href="tel:01097596665">이 프로그램 문의</a>
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<footer>
-  <div class="container">
-    <div class="footer-top">
-      <div class="footer-logo">거제도<span>팡팡</span></div>
-      <div class="footer-links">
-        <a href="#about">소개</a>
-        <a href="#services">서비스</a>
-        <a href="#gallery">갤러리</a>
-        <a href="#contact">오시는 길</a>
+<section class="visit reveal" id="visit">
+  <div class="wrap visit-grid">
+    <div>
+      <div class="eyebrow">VISIT &amp; HOURS</div>
+      <h2 class="headline">오시는 길 · 운영 안내</h2>
+      <p>운영 기간과 시간, 당일 일정은 전화로 문의해 주시면 가장 정확하게 안내드립니다.</p>
+      <div class="map-card">
+        <div class="map-icon">NAVER<br>PLACE</div>
+        <div>
+          <div class="map-card-title">네이버 플레이스에서 확인</div>
+          <div class="map-card-sub">운영 시간 · 길찾기 · 리뷰까지<br>네이버 플레이스에서 한 번에 확인하세요</div>
+          <a class="map-card-link" href="https://naver.me/GHLl5Cof" target="_blank" rel="noopener">네이버 플레이스 바로가기</a>
+        </div>
+      </div>
+      <div class="info-grid">
+        <div class="info-cell"><div class="info-cell-label">주소 · ADDRESS</div><div class="info-cell-value">경상남도 거제시 일운면 거제대로 2660</div></div>
+        <div class="info-cell"><div class="info-cell-label">연락처 · CONTACT</div><div class="info-cell-value">010-9759-6665</div></div>
       </div>
     </div>
-    <div class="footer-bottom">
-      <span>&copy; 2026 거제도팡팡. All rights reserved.</span>
-      <span>문의 010-9759-6665</span>
+    <div class="visit-photo ph">계류장/시설 사진</div>
+  </div>
+</section>
+
+<section class="gallery reveal" id="gallery">
+  <div class="wrap">
+    <div class="section-head">
+      <div>
+        <div class="eyebrow">GALLERY</div>
+        <h2 class="headline">거제도팡팡의 순간들</h2>
+      </div>
+      <p>실제 투어 사진으로 곧 채워질 갤러리입니다.</p>
+    </div>
+    <div class="gallery-grid">
+      <div class="ph g1">사진 1</div>
+      <div class="ph g2">사진 2</div>
+      <div class="ph g3">사진 3</div>
+      <div class="ph g4">사진 4</div>
+      <div class="ph g5">사진 5</div>
+    </div>
+  </div>
+</section>
+
+<section class="reviews reveal" id="reviews">
+  <div class="wrap">
+    <div class="section-head">
+      <div>
+        <div class="eyebrow">REVIEWS</div>
+        <h2 class="headline">다녀간 분들의 후기</h2>
+      </div>
+    </div>
+    <div class="review-empty">
+      <div class="stars">★★★★★</div>
+      <p>아직 등록된 후기가 없어요. 다녀가신 분들의 소중한 후기가 이곳에 하나씩 채워질 예정입니다.</p>
+      <a href="#contact">지금 예약하고 첫 후기를 남겨보세요 →</a>
+    </div>
+  </div>
+</section>
+
+<div class="cta-band reveal">
+  <div class="wrap">
+    <div>
+      <h2 class="headline">지금 전화하면 오늘 탈 수 있어요</h2>
+      <p>단체·기업 워크샵은 인원과 희망일만 알려주시면 안내해드립니다.</p>
+    </div>
+    <div class="cta-actions">
+      <a class="cta-phone" href="tel:01097596665">010-9759-6665</a>
+    </div>
+  </div>
+</div>
+
+<footer id="contact">
+  <div class="wrap">
+    <div>
+      <div class="footer-brand">거제도팡팡<span>GEOJEPANGPANG</span></div>
+      <div class="footer-meta">경상남도 거제시 일운면 거제대로 2660 · 010-9759-6665<br>운영 시간은 전화 문의 시 안내해드립니다</div>
+    </div>
+    <div class="footer-links">
+      <span>이용약관</span><span>개인정보처리방침</span><span>안전규정</span>
     </div>
   </div>
 </footer>
 
-<a href="tel:01097596665" class="float-call" aria-label="전화 문의">
-  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-</a>
+<div class="mobile-bar">
+  <a href="tel:01097596665">📞 전화 문의하기</a>
+</div>
 
 <script>
-  // header scroll state
-  const header = document.getElementById('siteHeader');
-  const floatCall = document.querySelector('.float-call');
-  window.addEventListener('scroll', () => {
-    header.classList.toggle('scrolled', window.scrollY > 40);
-    floatCall.classList.toggle('visible', window.scrollY > window.innerHeight * 0.6);
+const PROGRAMS = [
+  { name:"제트스키", en:"JET SKI TOUR",
+    desc:"직접 운전하는 20분 체험부터 인근 섬을 돌아보는 40분 투어까지. 면허 없이 안전요원 동반으로 탑승하며, 2인 동승도 가능합니다.",
+    tags:["20분 / 40분","2인 동승 가능","면허 불필요"] },
+  { name:"수상 견인 놀이기구", en:"TOWABLES",
+    desc:"바나나보트, 플라잉피쉬, 땅콩보트를 원하는 만큼 골라서. 단체가 가장 많이 찾는 프로그램이고, 아이들도 보호자와 함께 탈 수 있습니다.",
+    tags:["바나나보트","플라잉피쉬","땅콩보트"] },
+  { name:"패들보드", en:"PADDLE BOARD",
+    desc:"잔잔한 만 안쪽에서 서서 노를 젓는 SUP. 짧은 강습이면 대부분 혼자 타게 되고, 앉아서 타도 충분히 재미있습니다.",
+    tags:["초보 강습 포함","커플 추천","전 연령"] },
+  { name:"스노클링", en:"SNORKELING",
+    desc:"물이 맑은 포인트까지 보트로 이동해 바다 속을 봅니다. 마스크·스노클·부력 슈트 일체를 제공하고, 수영을 못해도 참여할 수 있습니다.",
+    tags:["장비 일체 제공","수영 못해도 OK","가족 추천"] },
+  { name:"플로팅 해먹", en:"FLOATING HAMMOCK",
+    desc:"바다 위에 띄운 큰 데크형 튜브에 돗자리처럼 누워 쉬는 시간. 음료와 도시락을 올려두고 피크닉처럼 즐기실 수 있어 가족·커플에게 인기입니다.",
+    tags:["바다 위 피크닉","가족·커플","여유로운 휴식"] },
+];
+
+const chipRow = document.getElementById('chipRow');
+const programPhoto = document.getElementById('programPhoto');
+const programEn = document.getElementById('programEn');
+const programName = document.getElementById('programName');
+const programDesc = document.getElementById('programDesc');
+const programTags = document.getElementById('programTags');
+
+function renderProgram(i){
+  const p = PROGRAMS[i];
+  programPhoto.textContent = p.name + ' 사진';
+  programEn.textContent = p.en;
+  programName.textContent = p.name;
+  programDesc.textContent = p.desc;
+  programTags.innerHTML = p.tags.map(t => `<span>${t}</span>`).join('');
+  [...chipRow.children].forEach((chip, idx) => chip.classList.toggle('active', idx === i));
+}
+
+PROGRAMS.forEach((p, i) => {
+  const chip = document.createElement('button');
+  chip.type = 'button';
+  chip.className = 'chip' + (i === 0 ? ' active' : '');
+  chip.textContent = p.name;
+  chip.addEventListener('click', () => renderProgram(i));
+  chipRow.appendChild(chip);
+});
+renderProgram(0);
+
+/* header + mobile nav */
+const header = document.getElementById('siteHeader');
+window.addEventListener('scroll', () => {
+  header.classList.toggle('scrolled', window.scrollY > 40);
+});
+
+const navToggle = document.getElementById('navToggle');
+const mobileNav = document.getElementById('mobileNav');
+const mobileNavClose = document.getElementById('mobileNavClose');
+navToggle.addEventListener('click', () => mobileNav.classList.add('open'));
+mobileNavClose.addEventListener('click', () => mobileNav.classList.remove('open'));
+mobileNav.querySelectorAll('a').forEach(a => a.addEventListener('click', () => mobileNav.classList.remove('open')));
+
+/* reveal on scroll */
+const revealEls = document.querySelectorAll('.reveal');
+const io = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) entry.target.classList.add('in');
   });
-
-  // mobile nav
-  const menuBtn = document.getElementById('menuBtn');
-  const closeBtn = document.getElementById('closeBtn');
-  const mobileNav = document.getElementById('mobileNav');
-  menuBtn.addEventListener('click', () => mobileNav.classList.add('open'));
-  closeBtn.addEventListener('click', () => mobileNav.classList.remove('open'));
-  mobileNav.querySelectorAll('a').forEach(a => a.addEventListener('click', () => mobileNav.classList.remove('open')));
-
-  // reveal on scroll
-  const revealEls = document.querySelectorAll('.reveal');
-  const io = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('in');
-        io.unobserve(entry.target);
-      }
-    });
-  }, { threshold: 0.15 });
-  revealEls.forEach(el => io.observe(el));
+}, { threshold: 0.15 });
+revealEls.forEach(el => io.observe(el));
 </script>
 </body>
 </html>

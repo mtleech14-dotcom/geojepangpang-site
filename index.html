@@ -103,7 +103,6 @@ img{max-width:100%;display:block;}
 .hero-video-wrap{position:absolute;inset:0;overflow:hidden;}
 .hero-video-wrap iframe{
   position:absolute;top:50%;left:50%;border:0;pointer-events:none;
-  width:177.78vh;height:56.25vw;min-width:100%;min-height:100%;
   transform:translate(-50%,-50%);
 }
 .hero-overlay{
@@ -567,11 +566,32 @@ function applyHeroMode(c){
     const origin = encodeURIComponent(location.origin);
     wrap.innerHTML = `<iframe src="https://www.youtube-nocookie.com/embed/${id}?autoplay=1&mute=1&loop=1&playlist=${id}&controls=0&showinfo=0&rel=0&modestbranding=1&playsinline=1&iv_load_policy=3&origin=${origin}" title="거제도팡팡 소개 영상" allow="autoplay; encrypted-media; picture-in-picture"></iframe>`;
     wrap.style.display = 'block';
+    sizeHeroVideo();
   } else {
     wrap.style.display = 'none';
     wrap.innerHTML = '';
   }
 }
+
+/* Size the hero video iframe in JS (not vw/vh) so it always exactly covers
+   the hero box and keeps a true 16:9 picture — the hero's own height on
+   mobile isn't a clean 100vh (text pushes it taller), so pure viewport-unit
+   math drifts out of ratio there. */
+function sizeHeroVideo(){
+  const wrap = document.getElementById('heroVideoWrap');
+  const iframe = wrap && wrap.querySelector('iframe');
+  if (!iframe) return;
+  const w = wrap.clientWidth, h = wrap.clientHeight;
+  if (!w || !h) return;
+  const targetRatio = 16 / 9;
+  let iw, ih;
+  if (w / h > targetRatio) { iw = w; ih = w / targetRatio; }
+  else { ih = h; iw = h * targetRatio; }
+  iframe.style.width = iw + 'px';
+  iframe.style.height = ih + 'px';
+}
+window.addEventListener('resize', sizeHeroVideo);
+window.addEventListener('orientationchange', () => setTimeout(sizeHeroVideo, 200));
 
 function applyContent(c){
   if (c.phone) setPhone(c.phone);

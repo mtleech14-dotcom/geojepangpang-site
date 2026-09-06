@@ -127,6 +127,20 @@ img{max-width:100%;display:block;}
   margin-top:14px;font-family:Anton,sans-serif;font-size:11.5px;letter-spacing:.18em;color:var(--blue-light);
   text-shadow:0 1px 10px rgba(0,10,20,.45);
 }
+.hero-reserve-btn{display:none;}
+.reserve-modal{position:fixed;inset:0;z-index:300;display:flex;align-items:center;justify-content:center;padding:24px;}
+.reserve-modal[hidden]{display:none;}
+.reserve-modal-backdrop{position:absolute;inset:0;background:rgba(0,26,46,.55);}
+.reserve-modal-card{
+  position:relative;background:#fff;border-radius:18px;padding:34px 26px 28px;max-width:360px;width:100%;
+  box-shadow:0 20px 60px rgba(0,26,46,.35);
+}
+.reserve-modal-close{
+  position:absolute;top:12px;right:12px;background:none;border:none;font-size:20px;color:var(--muted);
+  cursor:pointer;line-height:1;padding:8px;
+}
+.reserve-modal-phone{margin-top:6px;font-family:Anton,sans-serif;font-size:30px;letter-spacing:.02em;color:var(--navy);}
+.reserve-modal-note{margin-top:14px;font-size:13px;line-height:1.75;color:var(--muted);}
 .hero-bar{
   position:absolute;left:0;right:0;bottom:0;min-height:96px;background:rgba(255,255,255,.97);
   backdrop-filter:blur(8px);display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;
@@ -282,13 +296,16 @@ footer .wrap{padding:0;display:flex;justify-content:space-between;align-items:fl
   #siteHeader{padding:16px 20px;}
   .nav-desktop{display:none;}
   .nav-toggle{display:block;}
-  .hero{height:auto;min-height:100vh;padding-bottom:210px;}
+  .hero{height:auto;min-height:100vh;padding-bottom:70px;}
   .hero-content{position:relative;z-index:2;bottom:auto;padding:150px 20px 0;pointer-events:auto;}
   .hero-overlay{background:linear-gradient(180deg,rgba(0,26,46,.7) 0%,rgba(0,26,46,.6) 40%,rgba(0,26,46,.55) 60%,rgba(0,26,46,.9) 100%);}
   .hero h1{max-width:100%;}
-  .hero-bar{position:static;flex-direction:column;align-items:flex-start;margin-top:36px;}
-  .hero-bar-info{flex-direction:column;align-items:flex-start;gap:14px;}
-  .hero-bar-divider{display:none;}
+  .hero-bar{display:none;}
+  .hero-reserve-btn{
+    display:inline-flex;align-items:center;gap:8px;margin-top:24px;pointer-events:auto;cursor:pointer;
+    background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.45);color:#fff;
+    padding:12px 18px;border-radius:999px;font-size:13.5px;font-weight:700;
+  }
   .btn-call{width:100%;justify-content:center;}
   .programs,.visit,.gallery{padding:64px 0;}
   .program-card{grid-template-columns:1fr;}
@@ -351,6 +368,7 @@ footer .wrap{padding:0;display:flex;justify-content:space-between;align-items:fl
     <h1 class="headline" id="heroHeadline">짜릿한 거제!<br>물 위에서 제일<br>시원한 하루</h1>
     <p id="heroSubtext">제트스키부터 바다 위 플로팅 해먹까지. 초보자·아이 동반 가족·단체 워크샵 모두 안전요원과 함께 즐기는 거제 수상레저.</p>
     <div class="hero-tags">JET SKI · TOWABLES · PADDLE BOARD · SNORKELING · FLOATING HAMMOCK</div>
+    <button type="button" class="hero-reserve-btn" id="heroReserveBtn">📞 예약 문의 정보 보기</button>
   </div>
   <div class="hero-bar">
     <div class="hero-bar-info">
@@ -364,6 +382,17 @@ footer .wrap{padding:0;display:flex;justify-content:space-between;align-items:fl
     <a class="btn-call" href="tel:01097596665" data-bind-tel>📞 지금 전화하기</a>
   </div>
 </section>
+
+<div class="reserve-modal" id="reserveModal" hidden>
+  <div class="reserve-modal-backdrop" data-reserve-close></div>
+  <div class="reserve-modal-card">
+    <button type="button" class="reserve-modal-close" data-reserve-close aria-label="닫기">✕</button>
+    <div class="hero-bar-label">RESERVATION · 예약 문의</div>
+    <div class="reserve-modal-phone" data-bind="phone">010-9759-6665</div>
+    <div class="reserve-modal-note"><span data-bind="address">경상남도 거제시 일운면 거제대로 2660</span><br>운영 시간·당일 일정은 전화로 문의해 주세요</div>
+    <a class="btn-call" href="tel:01097596665" data-bind-tel style="margin-top:20px;width:100%;justify-content:center;">📞 지금 전화하기</a>
+  </div>
+</div>
 
 <div class="marquee">
   <div class="marquee-track">
@@ -507,6 +536,16 @@ const mobileNavClose = document.getElementById('mobileNavClose');
 navToggle.addEventListener('click', () => mobileNav.classList.add('open'));
 mobileNavClose.addEventListener('click', () => mobileNav.classList.remove('open'));
 mobileNav.querySelectorAll('a').forEach(a => a.addEventListener('click', () => mobileNav.classList.remove('open')));
+
+/* reservation popup (mobile) */
+const reserveModal = document.getElementById('reserveModal');
+const heroReserveBtn = document.getElementById('heroReserveBtn');
+if (heroReserveBtn && reserveModal) {
+  heroReserveBtn.addEventListener('click', () => { reserveModal.hidden = false; });
+  reserveModal.querySelectorAll('[data-reserve-close]').forEach(el => {
+    el.addEventListener('click', () => { reserveModal.hidden = true; });
+  });
+}
 
 /* reveal on scroll */
 const revealEls = document.querySelectorAll('.reveal');

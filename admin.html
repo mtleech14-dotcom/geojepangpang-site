@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>거제도팡팡 관리자</title>
+<style>
+:root{
+  --navy:#001A2E; --blue:#0090D9; --bg:#F2F7F9; --line:rgba(0,26,46,.12);
+  --ink:#001A2E; --muted:rgba(0,26,46,.6);
+}
+*{box-sizing:border-box;}
+body{margin:0;font-family:-apple-system,BlinkMacSystemFont,'Malgun Gothic','Apple SD Gothic Neo',sans-serif;background:var(--bg);color:var(--ink);}
+.wrap{max-width:760px;margin:0 auto;padding:24px 16px 80px;}
+h1{font-size:20px;margin:18px 0 4px;}
+.sub{color:var(--muted);font-size:13px;margin-bottom:24px;}
+.card{background:#fff;border:1px solid var(--line);border-radius:14px;padding:20px;margin-bottom:16px;}
+label{display:block;font-size:12.5px;font-weight:700;color:var(--muted);margin:14px 0 6px;}
+label:first-child{margin-top:0;}
+input[type=text], input[type=password], input[type=tel], textarea{
+  width:100%;padding:10px 12px;border:1px solid var(--line);border-radius:8px;font-size:14px;font-family:inherit;
+}
+textarea{resize:vertical;min-height:60px;}
+.row{display:flex;gap:12px;}
+.row > div{flex:1;}
+.photo-row{display:flex;align-items:center;gap:14px;margin-top:8px;}
+.photo-row img{width:90px;height:64px;object-fit:cover;border-radius:8px;background:#eee;border:1px solid var(--line);}
+.photo-row .noimg{width:90px;height:64px;border-radius:8px;background:#eee;border:1px solid var(--line);display:flex;align-items:center;justify-content:center;font-size:10px;color:var(--muted);text-align:center;}
+button{cursor:pointer;font-family:inherit;}
+.btn-primary{background:var(--navy);color:#fff;border:none;border-radius:10px;padding:13px 22px;font-size:15px;font-weight:700;}
+.btn-primary:disabled{opacity:.5;cursor:default;}
+.btn-file{background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:8px 12px;font-size:12.5px;}
+.btn-remove{background:none;border:none;color:#c0392b;font-size:12px;text-decoration:underline;padding:0;}
+.program-card{border:1px solid var(--line);border-radius:12px;padding:16px;margin-top:14px;}
+.program-card h3{margin:0 0 8px;font-size:15px;}
+.hint{font-size:11.5px;color:var(--muted);margin-top:4px;}
+.marquee-item{display:flex;gap:8px;margin-top:8px;}
+.marquee-item input{flex:1;}
+.marquee-item button{background:none;border:none;color:#c0392b;font-size:18px;line-height:1;padding:4px 8px;}
+.add-btn{margin-top:10px;background:var(--bg);border:1px dashed var(--line);border-radius:8px;padding:8px 14px;font-size:13px;color:var(--navy);}
+#loginScreen{max-width:340px;margin:80px auto;}
+#loginScreen .card{padding:28px;}
+#status{position:fixed;bottom:0;left:0;right:0;padding:14px;text-align:center;font-size:14px;font-weight:600;color:#fff;transform:translateY(100%);transition:transform .25s;}
+#status.show{transform:translateY(0);}
+#status.ok{background:#1a7a3d;}
+#status.err{background:#b3261e;}
+#status.busy{background:var(--navy);}
+.savebar{position:sticky;bottom:16px;display:flex;justify-content:flex-end;margin-top:20px;}
+.section-title{font-size:13px;font-weight:800;letter-spacing:.06em;color:var(--blue);margin:28px 0 8px;text-transform:uppercase;}
+.section-title:first-of-type{margin-top:0;}
+</style>
+</head>
+<body>
+
+<div id="loginScreen">
+  <div class="wrap">
+    <h1>거제도팡팡 관리자</h1>
+    <div class="sub">사진·텍스트를 직접 수정하고 바로 사이트에 반영합니다.</div>
+    <div class="card">
+      <label for="pw">비밀번호</label>
+      <input type="password" id="pw" autocomplete="current-password">
+      <div style="margin-top:16px;">
+        <button class="btn-primary" id="loginBtn" style="width:100%;">로그인</button>
+      </div>
+      <div id="loginError" style="color:#b3261e;font-size:13px;margin-top:10px;display:none;"></div>
+    </div>
+  </div>
+</div>
+
+<div id="editScreen" class="wrap" style="display:none;">
+  <h1>거제도팡팡 관리자</h1>
+  <div class="sub">수정 후 맨 아래 저장 버튼을 누르면 1분 안에 실제 사이트에 반영됩니다.</div>
+
+  <div class="section-title">연락처</div>
+  <div class="card">
+    <div class="row">
+      <div>
+        <label>전화번호</label>
+        <input type="tel" id="f_phone" placeholder="010-0000-0000">
+      </div>
+      <div>
+        <label>주소</label>
+        <input type="text" id="f_address">
+      </div>
+    </div>
+  </div>
+
+  <div class="section-title">홈 화면</div>
+  <div class="card">
+    <label>홈 화면 사진</label>
+    <div class="photo-row">
+      <img id="p_hero" style="display:none;">
+      <div class="noimg" id="p_hero_ph">사진 없음</div>
+      <button type="button" class="btn-file" onclick="document.getElementById('f_hero').click()">사진 선택</button>
+      <input type="file" id="f_hero" accept="image/*" style="display:none;">
+    </div>
+    <div class="hint">가로로 넓은 사진이 잘 어울려요 (권장 1600px 이상)</div>
+
+    <label>상단 뱃지 문구</label>
+    <input type="text" id="f_badge">
+
+    <label>큰 제목 (한 줄씩, 최대 3줄)</label>
+    <input type="text" id="f_h1">
+    <input type="text" id="f_h2" style="margin-top:8px;">
+    <input type="text" id="f_h3" style="margin-top:8px;">
+
+    <label>소개 문구</label>
+    <textarea id="f_subtext"></textarea>
+  </div>
+
+  <div class="section-title">스크롤 문구</div>
+  <div class="card">
+    <div id="marqueeList"></div>
+    <button type="button" class="add-btn" onclick="addMarqueeItem('')">+ 문구 추가</button>
+    <div class="hint">화면 위쪽에서 좌우로 흐르는 짧은 문구들이에요</div>
+  </div>
+
+  <div class="section-title">프로그램 5종</div>
+  <div id="programsList"></div>
+
+  <div class="section-title">시설 · 오시는 길</div>
+  <div class="card">
+    <label>계류장/시설 사진</label>
+    <div class="photo-row">
+      <img id="p_visit" style="display:none;">
+      <div class="noimg" id="p_visit_ph">사진 없음</div>
+      <button type="button" class="btn-file" onclick="document.getElementById('f_visit').click()">사진 선택</button>
+      <input type="file" id="f_visit" accept="image/*" style="display:none;">
+    </div>
+
+    <label>네이버 플레이스 QR 사진</label>
+    <div class="photo-row">
+      <img id="p_qr" style="display:none;">
+      <div class="noimg" id="p_qr_ph">사진 없음</div>
+      <button type="button" class="btn-file" onclick="document.getElementById('f_qr').click()">사진 선택</button>
+      <input type="file" id="f_qr" accept="image/*" style="display:none;">
+    </div>
+  </div>
+
+  <div class="section-title">갤러리</div>
+  <div class="card">
+    <label>갤러리 안내 문구</label>
+    <input type="text" id="f_gallery">
+  </div>
+
+  <div class="savebar">
+    <button class="btn-primary" id="saveBtn">저장하고 사이트에 반영</button>
+  </div>
+</div>
+
+<div id="status"></div>
+
+<script>
+let TOKEN = null;
+let CONTENT = null;
+
+const $ = (id) => document.getElementById(id);
+
+function showStatus(msg, kind, sticky){
+  const el = $('status');
+  el.textContent = msg;
+  el.className = 'show ' + kind;
+  if (!sticky) setTimeout(() => { el.className = ''; }, 3200);
+}
+
+/* ---- image helpers: resize + compress in the browser before upload ---- */
+function fileToResizedDataURL(file, maxW){
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onerror = reject;
+    reader.onload = () => {
+      const img = new Image();
+      img.onerror = reject;
+      img.onload = () => {
+        let w = img.width, h = img.height;
+        if (w > maxW) { h = Math.round(h * maxW / w); w = maxW; }
+        const canvas = document.createElement('canvas');
+        canvas.width = w; canvas.height = h;
+        canvas.getContext('2d').drawImage(img, 0, 0, w, h);
+        resolve(canvas.toDataURL('image/jpeg', 0.72));
+      };
+      img.src = reader.result;
+    };
+    reader.readAsDataURL(file);
+  });
+}
+
+function wirePhotoInput(fileInputId, imgId, phId, maxW, setter){
+  $(fileInputId).addEventListener('change', async (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+    showStatus('사진 처리 중...', 'busy', true);
+    try {
+      const dataUrl = await fileToResizedDataURL(file, maxW);
+      setter(dataUrl);
+      $(imgId).src = dataUrl;
+      $(imgId).style.display = '';
+      $(phId).style.display = 'none';
+      showStatus('사진이 적용됐어요. 저장을 눌러주세요.', 'ok');
+    } catch (err) {
+      showStatus('사진 처리 실패: ' + err.message, 'err');
+    }
+  });
+}
+
+/* ---- marquee list ---- */
+function renderMarquee(){
+  const list = $('marqueeList');
+  list.innerHTML = '';
+  CONTENT.marquee.forEach((text, i) => {
+    const row = document.createElement('div');
+    row.className = 'marquee-item';
+    const input = document.createElement('input');
+    input.type = 'text';
+    input.value = text;
+    input.addEventListener('input', () => { CONTENT.marquee[i] = input.value; });
+    const del = document.createElement('button');
+    del.type = 'button';
+    del.textContent = '×';
+    del.addEventListener('click', () => { CONTENT.marquee.splice(i, 1); renderMarquee(); });
+    row.appendChild(input);
+    row.appendChild(del);
+    list.appendChild(row);
+  });
+}
+function addMarqueeItem(text){
+  CONTENT.marquee.push(text);
+  renderMarquee();
+}
+
+/* ---- programs ---- */
+function renderPrograms(){
+  const list = $('programsList');
+  list.innerHTML = '';
+  CONTENT.programs.forEach((p, i) => {
+    const card = document.createElement('div');
+    card.className = 'program-card';
+    const photoId = 'prog_photo_' + i;
+    const phId = 'prog_ph_' + i;
+    const fileId = 'prog_file_' + i;
+    card.innerHTML = `
+      <h3>${p.name || '(이름 없음)'}</h3>
+      <label>프로그램 이름</label>
+      <input type="text" data-k="name" value="${escapeAttr(p.name)}">
+      <label>영문 표기</label>
+      <input type="text" data-k="en" value="${escapeAttr(p.en)}">
+      <label>설명</label>
+      <textarea data-k="desc">${escapeHTML(p.desc)}</textarea>
+      <label>태그 (쉼표로 구분)</label>
+      <input type="text" data-k="tags" value="${escapeAttr((p.tags||[]).join(', '))}">
+      <label>사진</label>
+      <div class="photo-row">
+        <img id="${photoId}" style="${p.photo ? '' : 'display:none;'}" src="${p.photo || ''}">
+        <div class="noimg" id="${phId}" style="${p.photo ? 'display:none;' : ''}">사진 없음</div>
+        <button type="button" class="btn-file">사진 선택</button>
+        <input type="file" id="${fileId}" accept="image/*" style="display:none;">
+        ${p.photo ? `<button type="button" class="btn-remove" data-remove="${i}">사진 삭제</button>` : ''}
+      </div>
+    `;
+    card.querySelector('.btn-file').addEventListener('click', () => card.querySelector('#' + fileId).click());
+    card.querySelectorAll('[data-k]').forEach(el => {
+      el.addEventListener('input', () => {
+        const k = el.getAttribute('data-k');
+        if (k === 'tags') { CONTENT.programs[i].tags = el.value.split(',').map(s => s.trim()).filter(Boolean); }
+        else { CONTENT.programs[i][k] = el.value; }
+        if (k === 'name') card.querySelector('h3').textContent = el.value || '(이름 없음)';
+      });
+    });
+    const removeBtn = card.querySelector('[data-remove]');
+    if (removeBtn) removeBtn.addEventListener('click', () => {
+      CONTENT.programs[i].photo = null;
+      renderPrograms();
+    });
+    list.appendChild(card);
+    wirePhotoInput(fileId, photoId, phId, 1000, (dataUrl) => { CONTENT.programs[i].photo = dataUrl; });
+  });
+}
+
+function escapeHTML(s){ return (s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+function escapeAttr(s){ return (s||'').replace(/&/g,'&amp;').replace(/"/g,'&quot;'); }
+
+/* ---- load current content into the form ---- */
+function fillForm(){
+  $('f_phone').value = CONTENT.phone || '';
+  $('f_address').value = CONTENT.address || '';
+  $('f_badge').value = CONTENT.heroBadge || '';
+  const lines = CONTENT.heroHeadlineLines || [];
+  $('f_h1').value = lines[0] || '';
+  $('f_h2').value = lines[1] || '';
+  $('f_h3').value = lines[2] || '';
+  $('f_subtext').value = CONTENT.heroSubtext || '';
+  $('f_gallery').value = CONTENT.gallerySubtitle || '';
+
+  if (CONTENT.heroImage) { $('p_hero').src = CONTENT.heroImage; $('p_hero').style.display=''; $('p_hero_ph').style.display='none'; }
+  if (CONTENT.visitPhoto) { $('p_visit').src = CONTENT.visitPhoto; $('p_visit').style.display=''; $('p_visit_ph').style.display='none'; }
+  if (CONTENT.qrPhoto) { $('p_qr').src = CONTENT.qrPhoto; $('p_qr').style.display=''; $('p_qr_ph').style.display='none'; }
+
+  if (!Array.isArray(CONTENT.marquee)) CONTENT.marquee = [];
+  if (!Array.isArray(CONTENT.programs)) CONTENT.programs = [];
+  renderMarquee();
+  renderPrograms();
+}
+
+$('f_phone').addEventListener('input', e => CONTENT.phone = e.target.value);
+$('f_address').addEventListener('input', e => CONTENT.address = e.target.value);
+$('f_badge').addEventListener('input', e => CONTENT.heroBadge = e.target.value);
+['f_h1','f_h2','f_h3'].forEach(id => $(id).addEventListener('input', () => {
+  CONTENT.heroHeadlineLines = [$('f_h1').value, $('f_h2').value, $('f_h3').value].filter(Boolean);
+}));
+$('f_subtext').addEventListener('input', e => CONTENT.heroSubtext = e.target.value);
+$('f_gallery').addEventListener('input', e => CONTENT.gallerySubtitle = e.target.value);
+
+wirePhotoInput('f_hero', 'p_hero', 'p_hero_ph', 1600, (dataUrl) => { CONTENT.heroImage = dataUrl; });
+wirePhotoInput('f_visit', 'p_visit', 'p_visit_ph', 1000, (dataUrl) => { CONTENT.visitPhoto = dataUrl; });
+wirePhotoInput('f_qr', 'p_qr', 'p_qr_ph', 500, (dataUrl) => { CONTENT.qrPhoto = dataUrl; });
+
+/* ---- login ---- */
+$('loginBtn').addEventListener('click', doLogin);
+$('pw').addEventListener('keydown', e => { if (e.key === 'Enter') doLogin(); });
+
+async function doLogin(){
+  const pw = $('pw').value;
+  $('loginError').style.display = 'none';
+  $('loginBtn').disabled = true;
+  $('loginBtn').textContent = '확인 중...';
+  try {
+    const res = await fetch('/api/login', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ password: pw })
+    });
+    if (!res.ok) throw new Error('비밀번호가 올바르지 않아요');
+    const data = await res.json();
+    TOKEN = data.token;
+    sessionStorage.setItem('admin_token', TOKEN);
+    const contentRes = await fetch('content.json?ts=' + Date.now(), { cache: 'no-store' });
+    CONTENT = await contentRes.json();
+    fillForm();
+    $('loginScreen').style.display = 'none';
+    $('editScreen').style.display = '';
+  } catch (err) {
+    $('loginError').textContent = err.message;
+    $('loginError').style.display = '';
+  } finally {
+    $('loginBtn').disabled = false;
+    $('loginBtn').textContent = '로그인';
+  }
+}
+
+/* ---- save ---- */
+$('saveBtn').addEventListener('click', async () => {
+  $('saveBtn').disabled = true;
+  $('saveBtn').textContent = '저장 중...';
+  showStatus('GitHub에 저장하고 있어요 (최대 1분 정도 걸려요)...', 'busy', true);
+  try {
+    const res = await fetch('/api/save', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + TOKEN },
+      body: JSON.stringify({ content: CONTENT })
+    });
+    if (!res.ok) {
+      const t = await res.text();
+      throw new Error(t || ('저장 실패 (' + res.status + ')'));
+    }
+    showStatus('저장 완료! 1분 안에 실제 사이트에 반영됩니다.', 'ok');
+  } catch (err) {
+    showStatus('저장 실패: ' + err.message, 'err', true);
+  } finally {
+    $('saveBtn').disabled = false;
+    $('saveBtn').textContent = '저장하고 사이트에 반영';
+  }
+});
+
+/* auto-login if we still have a token from earlier this session */
+(function tryAutoLogin(){
+  const saved = sessionStorage.getItem('admin_token');
+  if (!saved) return;
+  TOKEN = saved;
+  fetch('content.json?ts=' + Date.now(), { cache: 'no-store' })
+    .then(r => r.json())
+    .then(c => {
+      CONTENT = c;
+      fillForm();
+      $('loginScreen').style.display = 'none';
+      $('editScreen').style.display = '';
+    })
+    .catch(() => {});
+})();
+</script>
+</body>
+</html>

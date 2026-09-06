@@ -100,6 +100,12 @@ img{max-width:100%;display:block;}
 /* ---- hero ---- */
 .hero{position:relative;height:100vh;min-height:640px;overflow:hidden;background:var(--navy);}
 .hero-bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;}
+.hero-video-wrap{position:absolute;inset:0;overflow:hidden;background:var(--navy);}
+.hero-video-wrap iframe{
+  position:absolute;top:50%;left:50%;border:0;pointer-events:none;
+  width:177.78vh;height:56.25vw;min-width:100%;min-height:100%;
+  transform:translate(-50%,-50%);
+}
 .hero-overlay{
   position:absolute;inset:0;
   background:linear-gradient(180deg,rgba(0,26,46,.62),rgba(0,26,46,.18) 45%,rgba(0,26,46,.85));
@@ -339,6 +345,7 @@ footer .wrap{padding:0;display:flex;justify-content:space-between;align-items:fl
 
 <section class="hero" id="top">
   <img class="hero-bg" id="heroImg" alt="거제도팡팡 히어로">
+  <div class="hero-video-wrap" id="heroVideoWrap" style="display:none;"></div>
   <div class="hero-overlay"></div>
   <div class="hero-content">
     <span class="hero-badge" id="heroBadge">● 오늘 출항 가능 · 예약 문의 환영</span>
@@ -543,6 +550,27 @@ function setText(sel, value){ document.querySelectorAll(sel).forEach(el => el.te
 function setHTML(sel, value){ document.querySelectorAll(sel).forEach(el => el.innerHTML = value); }
 function setImg(id, src){ const el = document.getElementById(id); if (el && src) el.src = src; }
 
+function extractYouTubeId(url){
+  if (!url) return null;
+  const m = String(url).match(/(?:youtube\.com\/(?:watch\?v=|shorts\/|embed\/)|youtu\.be\/)([A-Za-z0-9_-]{11})/);
+  return m ? m[1] : null;
+}
+function applyHeroMode(c){
+  const wrap = document.getElementById('heroVideoWrap');
+  const heroImgEl = document.getElementById('heroImg');
+  if (!wrap || !heroImgEl) return;
+  const id = c.heroMode === 'video' ? extractYouTubeId(c.heroVideoUrl) : null;
+  if (id) {
+    wrap.innerHTML = `<iframe src="https://www.youtube-nocookie.com/embed/${id}?autoplay=1&mute=1&loop=1&playlist=${id}&controls=0&showinfo=0&rel=0&modestbranding=1&playsinline=1&iv_load_policy=3" title="거제도팡팡 소개 영상" allow="autoplay; encrypted-media; picture-in-picture" loading="lazy"></iframe>`;
+    wrap.style.display = 'block';
+    heroImgEl.style.display = 'none';
+  } else {
+    wrap.style.display = 'none';
+    wrap.innerHTML = '';
+    heroImgEl.style.display = '';
+  }
+}
+
 function applyContent(c){
   if (c.phone) setPhone(c.phone);
   if (c.address) setText('[data-bind="address"]', c.address);
@@ -553,6 +581,7 @@ function applyContent(c){
   setImg('heroImg', c.heroImage);
   setImg('visitImg', c.visitPhoto);
   setImg('qrImg', c.qrPhoto);
+  applyHeroMode(c);
 
   if (Array.isArray(c.marquee) && c.marquee.length) {
     const html = c.marquee.map(t => `<span>${t}</span>`).join('');

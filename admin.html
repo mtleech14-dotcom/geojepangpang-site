@@ -49,6 +49,16 @@ button{cursor:pointer;font-family:inherit;}
 .savebar{position:sticky;bottom:16px;display:flex;justify-content:flex-end;margin-top:20px;}
 .section-title{font-size:13px;font-weight:800;letter-spacing:.06em;color:var(--blue);margin:28px 0 8px;text-transform:uppercase;}
 .section-title:first-of-type{margin-top:0;}
+.mode-toggle{display:flex;gap:8px;}
+.mode-toggle label{flex:1;display:flex;align-items:center;justify-content:center;gap:6px;margin:0;padding:10px 12px;
+  border:1px solid var(--line);border-radius:8px;font-size:13px;font-weight:700;color:var(--muted);cursor:pointer;background:var(--bg);}
+.mode-toggle input{margin:0;}
+.mode-toggle label.active{background:var(--navy);color:#fff;border-color:var(--navy);}
+.hero-block{transition:opacity .15s;}
+.hero-block.dim{opacity:.5;}
+.video-status{font-size:11.5px;margin-top:6px;font-weight:700;}
+.video-status.ok{color:#1a7a3d;}
+.video-status.err{color:#c0392b;}
 </style>
 </head>
 <body>
@@ -88,14 +98,30 @@ button{cursor:pointer;font-family:inherit;}
 
   <div class="section-title">홈 화면</div>
   <div class="card">
-    <label>홈 화면 사진</label>
-    <div class="photo-row">
-      <img id="p_hero" style="display:none;">
-      <div class="noimg" id="p_hero_ph">사진 없음</div>
-      <button type="button" class="btn-file" onclick="document.getElementById('f_hero').click()">사진 선택</button>
-      <input type="file" id="f_hero" accept="image/*" style="display:none;">
+    <label>메인 화면에 표시</label>
+    <div class="mode-toggle" id="heroModeToggle">
+      <label id="heroModePhotoLabel"><input type="radio" name="heroMode" id="f_hero_mode_photo" value="photo"> 사진</label>
+      <label id="heroModeVideoLabel"><input type="radio" name="heroMode" id="f_hero_mode_video" value="video"> 영상</label>
     </div>
-    <div class="hint">가로로 넓은 사진이 잘 어울려요 (권장 1600px 이상)</div>
+    <div class="hint">사진과 영상 중 하나를 골라서 메인 화면에 보여줄 수 있어요. 선택하지 않은 쪽 내용은 지워지지 않고 남아있어요.</div>
+
+    <div class="hero-block" id="heroPhotoBlock">
+      <label>홈 화면 사진</label>
+      <div class="photo-row">
+        <img id="p_hero" style="display:none;">
+        <div class="noimg" id="p_hero_ph">사진 없음</div>
+        <button type="button" class="btn-file" onclick="document.getElementById('f_hero').click()">사진 선택</button>
+        <input type="file" id="f_hero" accept="image/*" style="display:none;">
+      </div>
+      <div class="hint">가로로 넓은 사진이 잘 어울려요 (권장 1600px 이상)</div>
+    </div>
+
+    <div class="hero-block" id="heroVideoBlock">
+      <label>유튜브 영상 링크</label>
+      <input type="text" id="f_hero_video_url" placeholder="예: https://www.youtube.com/watch?v=xxxxxxxxxxx">
+      <div class="hint">유튜브에 영상을 올린 뒤(비공개·목록에 안 보이게 설정도 가능해요) 그 주소를 붙여넣어 주세요. 소리 없이 자동으로 반복 재생돼요.</div>
+      <div class="video-status" id="heroVideoStatus"></div>
+    </div>
 
     <label>상단 뱃지 문구</label>
     <input type="text" id="f_badge">
@@ -306,6 +332,13 @@ function fillForm(){
   if (CONTENT.visitPhoto) { $('p_visit').src = CONTENT.visitPhoto; $('p_visit').style.display=''; $('p_visit_ph').style.display='none'; }
   if (CONTENT.qrPhoto) { $('p_qr').src = CONTENT.qrPhoto; $('p_qr').style.display=''; $('p_qr_ph').style.display='none'; }
 
+  const heroMode = CONTENT.heroMode === 'video' ? 'video' : 'photo';
+  CONTENT.heroMode = heroMode;
+  $('f_hero_mode_' + heroMode).checked = true;
+  $('f_hero_video_url').value = CONTENT.heroVideoUrl || '';
+  updateHeroModeUI();
+  validateHeroVideo();
+
   if (!Array.isArray(CONTENT.marquee)) CONTENT.marquee = [];
   if (!Array.isArray(CONTENT.programs)) CONTENT.programs = [];
   if (!Array.isArray(CONTENT.gallery)) CONTENT.gallery = [];
@@ -391,6 +424,41 @@ function renderReviews(){
     wrap.appendChild(card);
   });
 }
+
+/* ---- hero photo/video mode ---- */
+function extractYouTubeId(url){
+  if (!url) return null;
+  const m = String(url).match(/(?:youtube\.com\/(?:watch\?v=|shorts\/|embed\/)|youtu\.be\/)([A-Za-z0-9_-]{11})/);
+  return m ? m[1] : null;
+}
+function updateHeroModeUI(){
+  const mode = CONTENT.heroMode === 'video' ? 'video' : 'photo';
+  $('heroModePhotoLabel').classList.toggle('active', mode === 'photo');
+  $('heroModeVideoLabel').classList.toggle('active', mode === 'video');
+  $('heroPhotoBlock').classList.toggle('dim', mode === 'video');
+  $('heroVideoBlock').classList.toggle('dim', mode === 'photo');
+}
+function validateHeroVideo(){
+  const status = $('heroVideoStatus');
+  const url = ($('f_hero_video_url').value || '').trim();
+  if (!url) { status.textContent = ''; status.className = 'video-status'; return; }
+  const id = extractYouTubeId(url);
+  if (id) {
+    status.textContent = '유튜브 영상으로 잘 인식됐어요. 저장하면 이 영상이 자동 재생돼요.';
+    status.className = 'video-status ok';
+  } else {
+    status.textContent = '유튜브 링크가 아닌 것 같아요. 유튜브 주소(youtube.com 또는 youtu.be)를 붙여넣어 주세요.';
+    status.className = 'video-status err';
+  }
+}
+document.querySelectorAll('input[name="heroMode"]').forEach(r => r.addEventListener('change', () => {
+  CONTENT.heroMode = document.querySelector('input[name="heroMode"]:checked').value;
+  updateHeroModeUI();
+}));
+$('f_hero_video_url').addEventListener('input', e => {
+  CONTENT.heroVideoUrl = e.target.value.trim();
+  validateHeroVideo();
+});
 
 $('f_phone').addEventListener('input', e => CONTENT.phone = e.target.value);
 $('f_address').addEventListener('input', e => CONTENT.address = e.target.value);

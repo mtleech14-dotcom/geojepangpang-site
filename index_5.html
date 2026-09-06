@@ -1,0 +1,659 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>거제도팡팡 | 짜릿한 거제! 수상레저 &amp; 제트스키 투어</title>
+<meta name="description" content="거제도팡팡 - 제트스키 투어, 수상 견인 놀이기구, 패들보드, 스노클링, 플로팅 해먹까지. 경상남도 거제시 일운면에서 즐기는 시원한 수상레저.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Gothic+A1:wght@300;400;500;700;900&family=Anton&family=Black+Han+Sans&display=swap" rel="stylesheet">
+<style>
+:root{
+  --navy:#001A2E;
+  --navy2:#00344F;
+  --blue:#0090D9;
+  --blue-light:#4fc3ec;
+  --bg-page:#F2F7F9;
+  --bg-alt:#DDE3E6;
+  --ink:#001A2E;
+  --muted:rgba(0,26,46,.65);
+  --muted-soft:rgba(0,26,46,.45);
+  --line:rgba(0,26,46,.12);
+  --radius:18px;
+  --naver:#03C75A;
+}
+*{box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{
+  margin:0;
+  font-family:"Gothic A1",system-ui,sans-serif;
+  color:var(--ink);
+  background:var(--bg-page);
+  -webkit-font-smoothing:antialiased;
+}
+a{color:inherit;text-decoration:none;}
+img{max-width:100%;display:block;}
+.headline{font-family:"Black Han Sans",sans-serif;font-weight:400;letter-spacing:-.02em;}
+.eyebrow{font-family:Anton,sans-serif;font-size:12px;letter-spacing:.24em;color:var(--blue);}
+.wrap{max-width:1240px;margin:0 auto;padding:0 44px;}
+.ph{
+  background:linear-gradient(135deg,var(--navy2),var(--blue));
+  display:flex;align-items:center;justify-content:center;
+  color:rgba(255,255,255,.75);font-size:13px;font-weight:500;
+  text-align:center;padding:12px;
+}
+
+/* ---- header ---- */
+#siteHeader{
+  position:fixed;top:0;left:0;right:0;z-index:200;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:20px 44px;transition:background .3s ease, box-shadow .3s ease, padding .3s ease;
+}
+#siteHeader.scrolled{
+  background:rgba(255,255,255,.96);backdrop-filter:blur(10px);
+  box-shadow:0 4px 24px rgba(0,26,46,.08);padding:12px 44px;
+}
+.brand{display:flex;align-items:center;gap:12px;}
+.brand-mark{
+  width:38px;height:38px;border-radius:11px;background:var(--blue);
+  display:flex;align-items:center;justify-content:center;
+  font-family:Anton,sans-serif;font-size:19px;color:var(--navy);flex:none;
+}
+.brand-name{display:flex;flex-direction:column;line-height:1.15;}
+.brand-name b{font-weight:500;font-size:17px;letter-spacing:-.01em;color:#fff;transition:color .3s ease;}
+.brand-name span{font-family:Anton,sans-serif;font-size:10px;letter-spacing:.22em;color:var(--blue-light);}
+#siteHeader.scrolled .brand-name b{color:var(--navy);}
+.nav-desktop{display:flex;align-items:center;gap:34px;}
+.nav-links{display:flex;gap:26px;font-size:13.5px;font-weight:500;}
+.nav-links a{color:rgba(255,255,255,.9);transition:color .2s ease;}
+#siteHeader.scrolled .nav-links a{color:rgba(0,26,46,.75);}
+.nav-links a:hover{color:var(--blue-light);}
+.header-cta{
+  display:flex;align-items:center;gap:8px;background:var(--blue);color:#fff;
+  font-weight:500;font-size:13.5px;padding:12px 20px;border-radius:999px;
+  white-space:nowrap;transition:background .2s ease,color .2s ease;
+}
+.header-cta:hover{background:#fff;color:var(--navy);}
+.nav-toggle{display:none;background:none;border:none;cursor:pointer;padding:6px;}
+.nav-toggle span,.nav-toggle span::before,.nav-toggle span::after{
+  content:"";display:block;width:24px;height:2px;background:#fff;border-radius:2px;
+  transition:transform .25s ease,opacity .25s ease,background .25s ease;position:relative;
+}
+.nav-toggle span::before{position:absolute;top:-8px;}
+.nav-toggle span::after{position:absolute;top:8px;}
+#siteHeader.scrolled .nav-toggle span,
+#siteHeader.scrolled .nav-toggle span::before,
+#siteHeader.scrolled .nav-toggle span::after{background:var(--navy);}
+
+.mobile-nav{
+  position:fixed;inset:0;z-index:250;background:var(--navy);
+  display:flex;flex-direction:column;padding:26px 30px;
+  transform:translateX(100%);transition:transform .32s ease;
+}
+.mobile-nav.open{transform:translateX(0);}
+.mobile-nav-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:44px;}
+.mobile-nav-close{background:none;border:none;color:#fff;font-size:28px;cursor:pointer;line-height:1;}
+.mobile-nav a{color:#fff;font-size:22px;font-weight:500;padding:16px 0;border-bottom:1px solid rgba(255,255,255,.12);}
+.mobile-nav .header-cta{margin-top:30px;justify-content:center;}
+
+/* ---- hero ---- */
+.hero{position:relative;height:100vh;min-height:640px;overflow:hidden;background:var(--navy);}
+.hero-bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;}
+.hero-video-wrap{position:absolute;inset:0;overflow:hidden;}
+.hero-video-wrap iframe{
+  position:absolute;top:50%;left:50%;border:0;pointer-events:none;
+  transform:translate(-50%,-50%);
+}
+.hero-overlay{
+  position:absolute;inset:0;
+  background:linear-gradient(180deg,rgba(0,26,46,.62),rgba(0,26,46,.18) 45%,rgba(0,26,46,.85));
+}
+.hero-content{position:absolute;left:0;right:0;bottom:170px;padding:0 44px;pointer-events:none;}
+.hero-badge{
+  display:inline-flex;align-items:center;gap:9px;background:rgba(0,26,46,.78);
+  border:1px solid var(--blue);padding:8px 15px;border-radius:999px;
+  font-size:12px;font-weight:500;color:var(--blue-light);
+}
+.hero h1{
+  margin:18px 0 0;font-size:clamp(38px,6.5vw,88px);line-height:1.05;color:#fff;max-width:900px;
+  text-shadow:0 2px 16px rgba(0,10,20,.5);
+}
+.hero p{
+  margin:24px 0 0;max-width:560px;font-size:17px;font-weight:500;line-height:1.85;color:rgba(255,255,255,.85);
+  text-shadow:0 1px 10px rgba(0,10,20,.45);
+}
+.hero-tags{
+  margin-top:14px;font-family:Anton,sans-serif;font-size:11.5px;letter-spacing:.18em;color:var(--blue-light);
+  text-shadow:0 1px 10px rgba(0,10,20,.45);
+}
+.hero-bar{
+  position:absolute;left:0;right:0;bottom:0;min-height:96px;background:rgba(255,255,255,.97);
+  backdrop-filter:blur(8px);display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;
+  padding:16px 44px;gap:16px;
+}
+.hero-bar-info{display:flex;align-items:center;gap:30px;flex-wrap:wrap;}
+.hero-bar-label{font-size:10.5px;font-weight:500;letter-spacing:.14em;color:var(--muted-soft);}
+.hero-bar-phone{margin-top:3px;font-family:Anton,sans-serif;font-size:25px;letter-spacing:.02em;color:var(--navy);}
+.hero-bar-divider{width:1px;height:40px;background:var(--line);}
+.hero-bar-note{font-size:12.5px;font-weight:500;line-height:1.6;color:var(--muted);}
+.btn-call{
+  display:inline-flex;align-items:center;gap:8px;background:var(--navy);color:#fff;
+  font-weight:500;font-size:14px;padding:15px 26px;border-radius:12px;transition:background .2s ease;
+}
+.btn-call:hover{background:var(--navy2);}
+
+/* ---- marquee ---- */
+.marquee{background:var(--navy);padding:12px 0;overflow:hidden;}
+.marquee-track{display:flex;width:max-content;animation:nx-marquee 26s linear infinite;}
+.marquee-set{display:flex;gap:40px;flex:none;white-space:nowrap;padding-right:40px;}
+.marquee-set span{font-family:Anton,sans-serif;font-size:14px;letter-spacing:.16em;color:var(--blue-light);}
+@keyframes nx-marquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+/* ---- programs ---- */
+.programs{padding:96px 0;}
+.section-head{display:flex;align-items:flex-end;justify-content:space-between;flex-wrap:wrap;gap:20px;}
+.section-head h2{margin:10px 0 0;font-size:clamp(30px,4vw,46px);}
+.section-head p{margin:0;max-width:320px;font-size:13px;line-height:1.9;color:var(--muted);}
+
+.chip-row{display:flex;gap:10px;margin-top:34px;flex-wrap:wrap;}
+.chip{
+  font-size:14px;font-weight:500;padding:14px 24px;border-radius:999px;cursor:pointer;
+  background:transparent;color:rgba(0,26,46,.72);border:1.5px solid var(--line);
+  transition:background .2s ease,color .2s ease,border-color .2s ease;
+}
+.chip.active{background:var(--navy);color:#fff;border-color:var(--navy);}
+
+.program-card{
+  display:grid;grid-template-columns:1.15fr 1fr;margin-top:26px;background:#fff;
+  border-radius:20px;overflow:hidden;box-shadow:0 10px 40px rgba(0,26,46,.1);
+}
+.program-photo{position:relative;min-height:420px;}
+.program-photo .ph{position:absolute;inset:0;font-size:15px;}
+.program-info{padding:48px 46px;display:flex;flex-direction:column;}
+.program-info h3{margin:12px 0 0;font-size:clamp(28px,3vw,40px);}
+.program-info p{margin:18px 0 0;font-size:14.5px;line-height:1.95;color:var(--muted);}
+.program-tags{display:flex;gap:8px;margin-top:24px;flex-wrap:wrap;}
+.program-tags span{font-size:12px;font-weight:500;color:var(--navy2);background:#DCF4FA;padding:8px 14px;border-radius:8px;}
+.program-foot{
+  margin-top:auto;padding-top:32px;border-top:1px solid var(--line);
+  display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;
+}
+.price-note{font-size:11px;font-weight:500;letter-spacing:.12em;color:var(--muted-soft);}
+.price-note b{display:block;margin-top:4px;font-family:Anton,sans-serif;font-size:22px;letter-spacing:.04em;color:var(--navy);}
+.btn-dark{
+  background:var(--navy);color:#fff;font-weight:500;font-size:14px;padding:16px 28px;
+  border-radius:12px;cursor:pointer;transition:background .2s ease;border:none;font-family:inherit;
+}
+.btn-dark:hover{background:var(--blue);}
+
+/* ---- visit ---- */
+.visit{background:#fff;padding:96px 0;}
+.visit-grid{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center;}
+.visit h2{margin:10px 0 20px;font-size:clamp(28px,3.4vw,40px);}
+.visit > .wrap > div:first-child p{margin:0 0 28px;font-size:14.5px;line-height:1.95;color:var(--muted);}
+.map-card{display:flex;gap:22px;align-items:center;padding:24px;background:var(--bg-page);border-radius:16px;}
+.map-icon{
+  width:100px;height:100px;flex:none;border-radius:12px;background:#fff;padding:6px;box-sizing:border-box;
+  display:flex;align-items:center;justify-content:center;box-shadow:0 2px 10px rgba(0,26,46,.12);
+}
+.map-card-title{font-size:15px;font-weight:500;color:var(--navy);}
+.map-card-sub{margin-top:8px;font-size:12.5px;line-height:1.8;color:var(--muted);}
+.map-card-link{display:inline-block;margin-top:12px;background:var(--naver);color:#fff;font-weight:500;font-size:12.5px;padding:11px 18px;border-radius:9px;}
+.info-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin-top:22px;}
+.info-cell{padding:18px 20px;border:1px solid var(--line);border-radius:14px;}
+.info-cell-label{font-size:11px;font-weight:500;letter-spacing:.12em;color:var(--muted-soft);}
+.info-cell-value{margin-top:7px;font-size:13.5px;color:var(--navy);}
+.visit-photo{position:relative;height:440px;border-radius:20px;overflow:hidden;background:var(--bg-alt);}
+
+/* ---- gallery ---- */
+.gallery{padding:96px 0;}
+.gallery-grid{display:grid;grid-template-columns:repeat(3,1fr);grid-auto-rows:200px;gap:14px;margin-top:34px;}
+.gallery-grid .ph{border-radius:14px;font-size:12.5px;}
+.g1{grid-column:span 2;grid-row:span 2;}
+.g2{grid-column:span 1;grid-row:span 1;}
+.g3{grid-column:span 1;grid-row:span 1;}
+.g4{grid-column:span 1;grid-row:span 1;}
+.g5{grid-column:span 2;grid-row:span 1;}
+.gallery-grid > div{position:relative;overflow:hidden;}
+.gallery-grid img{width:100%;height:100%;object-fit:cover;display:block;border-radius:14px;}
+
+/* ---- reviews (owner-submitted, real reviews only) ---- */
+.reviews{background:var(--bg-page);padding:80px 0;}
+.review-empty{
+  margin-top:26px;background:#fff;border-radius:20px;padding:56px 40px;text-align:center;
+}
+.review-empty .stars{font-size:20px;color:#FFB300;letter-spacing:4px;}
+.review-empty p{margin:16px auto 0;max-width:440px;font-size:14.5px;line-height:1.9;color:var(--muted);}
+.review-empty a{
+  display:inline-block;margin-top:20px;font-size:13px;font-weight:500;color:var(--blue);
+  border-bottom:1.5px solid var(--blue);padding-bottom:2px;
+}
+.review-grid{margin-top:26px;display:grid;grid-template-columns:repeat(3,1fr);gap:16px;}
+.review-card{background:#fff;border-radius:18px;padding:26px 24px;}
+.review-card .stars{font-size:14px;color:#FFB300;letter-spacing:2px;}
+.review-card .review-text{margin:14px 0 0;font-size:13.5px;line-height:1.8;color:var(--muted);}
+.review-card .review-meta{margin-top:16px;font-size:12px;font-weight:700;color:var(--navy);display:flex;justify-content:space-between;align-items:center;gap:8px;}
+.review-card .review-meta span:last-child{font-weight:500;color:var(--muted-soft);}
+@media (max-width:860px){
+  .review-grid{grid-template-columns:1fr;}
+}
+
+/* ---- cta band ---- */
+.cta-band{background:var(--blue);padding:66px 44px;}
+.cta-band .wrap{
+  padding:0;display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap;
+}
+.cta-band h2{margin:0;font-size:clamp(26px,3.6vw,44px);color:var(--navy);}
+.cta-band p{margin:12px 0 0;font-size:15px;font-weight:500;color:rgba(0,26,46,.72);}
+.cta-actions{display:flex;gap:12px;flex-wrap:wrap;}
+.cta-phone{
+  background:var(--navy);color:#fff;font-family:Anton,sans-serif;font-size:20px;letter-spacing:.04em;
+  padding:22px 30px;border-radius:14px;transition:background .2s ease;
+}
+.cta-phone:hover{background:var(--navy2);}
+
+/* ---- footer ---- */
+footer{background:var(--navy);padding:44px;}
+footer .wrap{padding:0;display:flex;justify-content:space-between;align-items:flex-end;gap:24px;flex-wrap:wrap;}
+.footer-brand{font-weight:500;font-size:15px;color:#fff;}
+.footer-brand span{font-family:Anton,sans-serif;font-size:11px;letter-spacing:.2em;color:var(--blue-light);margin-left:8px;}
+.footer-meta{margin-top:14px;font-size:11.5px;line-height:1.9;color:rgba(255,255,255,.45);}
+.footer-links{display:flex;gap:22px;font-size:11.5px;color:rgba(255,255,255,.55);flex-wrap:wrap;}
+
+/* ---- mobile fixed bar ---- */
+.mobile-bar{
+  position:fixed;left:0;right:0;bottom:0;z-index:150;background:#fff;
+  border-top:1px solid var(--line);padding:12px 16px calc(12px + env(safe-area-inset-bottom));
+  display:none;box-shadow:0 -6px 20px rgba(0,26,46,.08);
+}
+.mobile-bar a{
+  display:flex;align-items:center;justify-content:center;background:var(--navy);color:#fff;
+  font-weight:500;font-size:15px;padding:15px 0;border-radius:12px;
+}
+
+/* ---- reveal ---- */
+.reveal{opacity:0;transform:translateY(24px);transition:opacity .7s ease,transform .7s ease;}
+.reveal.in{opacity:1;transform:translateY(0);}
+
+/* ---- responsive ---- */
+@media(max-width:980px){
+  .wrap{padding:0 22px;}
+  #siteHeader{padding:16px 20px;}
+  .nav-desktop{display:none;}
+  .nav-toggle{display:block;}
+  .hero{height:auto;min-height:100vh;padding-bottom:210px;}
+  .hero-content{position:relative;z-index:2;bottom:auto;padding:150px 20px 0;pointer-events:auto;}
+  .hero-overlay{background:linear-gradient(180deg,rgba(0,26,46,.7) 0%,rgba(0,26,46,.6) 40%,rgba(0,26,46,.55) 60%,rgba(0,26,46,.9) 100%);}
+  .hero h1{max-width:100%;}
+  .hero-bar{position:static;flex-direction:column;align-items:flex-start;margin-top:36px;}
+  .hero-bar-info{flex-direction:column;align-items:flex-start;gap:14px;}
+  .hero-bar-divider{display:none;}
+  .btn-call{width:100%;justify-content:center;}
+  .programs,.visit,.gallery{padding:64px 0;}
+  .program-card{grid-template-columns:1fr;}
+  .program-photo{min-height:220px;}
+  .program-info{padding:30px 26px;}
+  .visit-grid{grid-template-columns:1fr;}
+  .visit-photo{height:260px;}
+  .gallery-grid{grid-template-columns:repeat(2,1fr);grid-auto-rows:150px;}
+  .g1,.g2,.g3,.g4,.g5{grid-column:span 1;grid-row:span 1;}
+  .cta-band{padding:44px 22px;}
+  footer{padding:36px 22px 100px;}
+  .mobile-bar{display:block;}
+}
+@media(max-width:600px){
+  .wrap{padding:0 18px;}
+  .hero-content{padding:130px 18px 0;}
+  .info-grid{grid-template-columns:1fr;}
+}
+</style>
+</head>
+<body>
+
+<header id="siteHeader">
+  <a class="brand" href="#top">
+    <span class="brand-mark">거</span>
+    <span class="brand-name"><b>거제도팡팡</b><span>GEOJEPANGPANG</span></span>
+  </a>
+  <nav class="nav-desktop">
+    <div class="nav-links">
+      <a href="#programs">프로그램</a>
+      <a href="#visit">시설·오시는 길</a>
+      <a href="#gallery">갤러리</a>
+      <a href="#reviews">후기</a>
+      <a href="#contact">단체 문의</a>
+    </div>
+    <a class="header-cta" href="tel:01097596665" data-bind-tel>📞 전화 문의</a>
+  </nav>
+  <button class="nav-toggle" id="navToggle" aria-label="메뉴 열기"><span></span></button>
+</header>
+
+<div class="mobile-nav" id="mobileNav">
+  <div class="mobile-nav-top">
+    <span class="brand-name"><b>거제도팡팡</b><span>GEOJEPANGPANG</span></span>
+    <button class="mobile-nav-close" id="mobileNavClose" aria-label="메뉴 닫기">&times;</button>
+  </div>
+  <a href="#programs">프로그램</a>
+  <a href="#visit">시설·오시는 길</a>
+  <a href="#gallery">갤러리</a>
+  <a href="#reviews">후기</a>
+  <a href="#contact">단체 문의</a>
+  <a class="header-cta" href="tel:01097596665" data-bind-tel>📞 전화 문의</a>
+</div>
+
+<section class="hero" id="top">
+  <img class="hero-bg" id="heroImg" alt="거제도팡팡 히어로">
+  <div class="hero-video-wrap" id="heroVideoWrap" style="display:none;"></div>
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <span class="hero-badge" id="heroBadge">● 오늘 출항 가능 · 예약 문의 환영</span>
+    <h1 class="headline" id="heroHeadline">짜릿한 거제!<br>물 위에서 제일<br>시원한 하루</h1>
+    <p id="heroSubtext">제트스키부터 바다 위 플로팅 해먹까지. 초보자·아이 동반 가족·단체 워크샵 모두 안전요원과 함께 즐기는 거제 수상레저.</p>
+    <div class="hero-tags">JET SKI · TOWABLES · PADDLE BOARD · SNORKELING · FLOATING HAMMOCK</div>
+  </div>
+  <div class="hero-bar">
+    <div class="hero-bar-info">
+      <div>
+        <div class="hero-bar-label">RESERVATION · 예약 문의</div>
+        <div class="hero-bar-phone" data-bind="phone">010-9759-6665</div>
+      </div>
+      <div class="hero-bar-divider"></div>
+      <div class="hero-bar-note"><span data-bind="address">경상남도 거제시 일운면 거제대로 2660</span><br>운영 시간·당일 일정은 전화로 문의해 주세요</div>
+    </div>
+    <a class="btn-call" href="tel:01097596665" data-bind-tel>📞 지금 전화하기</a>
+  </div>
+</section>
+
+<div class="marquee">
+  <div class="marquee-track">
+    <div class="marquee-set">
+      <span>안전요원 상시 배치</span><span>· 장비·구명조끼 전부 포함 ·</span><span>· 주차 무료 ·</span><span>단체 환영</span><span>· 짜릿한 거제! ·</span>
+    </div>
+    <div class="marquee-set" aria-hidden="true">
+      <span>안전요원 상시 배치</span><span>· 장비·구명조끼 전부 포함 ·</span><span>· 주차 무료 ·</span><span>단체 환영</span><span>· 짜릿한 거제! ·</span>
+    </div>
+  </div>
+</div>
+
+<section class="programs reveal" id="programs">
+  <div class="wrap">
+    <div class="section-head">
+      <div>
+        <div class="eyebrow">PROGRAMS</div>
+        <h2 class="headline">다섯 가지 즐기는 법</h2>
+      </div>
+      <p>전 프로그램 장비·구명조끼·보험 포함. 처음이면 안전요원이 붙어 강습부터 시작합니다.</p>
+    </div>
+
+    <div class="chip-row" id="chipRow"></div>
+
+    <div class="program-card">
+      <div class="program-photo" id="programPhoto"></div>
+      <div class="program-info">
+        <div class="eyebrow" id="programEn">JET SKI TOUR</div>
+        <h3 id="programName">제트스키</h3>
+        <p id="programDesc"></p>
+        <div class="program-tags" id="programTags"></div>
+        <div class="program-foot">
+          <div class="price-note">이용 요금<b>전화 문의</b></div>
+          <a class="btn-dark" href="tel:01097596665" data-bind-tel>이 프로그램 문의</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="visit reveal" id="visit">
+  <div class="wrap visit-grid">
+    <div>
+      <div class="eyebrow">VISIT &amp; HOURS</div>
+      <h2 class="headline">오시는 길 · 운영 안내</h2>
+      <p>운영 기간과 시간, 당일 일정은 전화로 문의해 주시면 가장 정확하게 안내드립니다.</p>
+      <div class="map-card">
+        <div class="map-icon"><img id="qrImg" alt="네이버 플레이스 QR" style="width:100%;height:100%;object-fit:contain;border-radius:8px;"></div>
+        <div>
+          <div class="map-card-title">네이버 플레이스에서 확인</div>
+          <div class="map-card-sub">QR을 스캔하거나 버튼을 눌러<br>운영 시간·길찾기·리뷰를 확인하세요</div>
+          <a class="map-card-link" href="https://naver.me/GHLl5Cof" target="_blank" rel="noopener">네이버 플레이스 바로가기</a>
+        </div>
+      </div>
+      <div class="info-grid">
+        <div class="info-cell"><div class="info-cell-label">주소 · ADDRESS</div><div class="info-cell-value">경상남도 거제시 일운면 거제대로 2660</div></div>
+        <div class="info-cell"><div class="info-cell-label">연락처 · CONTACT</div><div class="info-cell-value">010-9759-6665</div></div>
+      </div>
+    </div>
+    <div class="visit-photo"><img id="visitImg" alt="계류장 시설" style="width:100%;height:100%;object-fit:cover;display:block;"></div>
+  </div>
+</section>
+
+<section class="gallery reveal" id="gallery">
+  <div class="wrap">
+    <div class="section-head">
+      <div>
+        <div class="eyebrow">GALLERY</div>
+        <h2 class="headline">거제도팡팡의 순간들</h2>
+      </div>
+      <p id="gallerySubtitle">사진은 잠시 보류 중입니다 (업로드 예정)</p>
+    </div>
+    <div class="gallery-grid" id="galleryGrid">
+      <div class="ph g1" id="gallerySlot0">사진 1</div>
+      <div class="ph g2" id="gallerySlot1">사진 2</div>
+      <div class="ph g3" id="gallerySlot2">사진 3</div>
+      <div class="ph g4" id="gallerySlot3">사진 4</div>
+      <div class="ph g5" id="gallerySlot4">사진 5</div>
+    </div>
+  </div>
+</section>
+
+<section class="reviews reveal" id="reviews">
+  <div class="wrap">
+    <div class="section-head">
+      <div>
+        <div class="eyebrow">REVIEWS</div>
+        <h2 class="headline">다녀간 분들의 후기</h2>
+      </div>
+    </div>
+    <div id="reviewsArea">
+      <div class="review-empty" id="reviewEmpty">
+        <div class="stars">★★★★★</div>
+        <p>아직 등록된 후기가 없어요. 다녀가신 분들의 소중한 후기가 이곳에 하나씩 채워질 예정입니다.</p>
+        <a href="#contact">지금 예약하고 첫 후기를 남겨보세요 →</a>
+      </div>
+      <div class="review-grid" id="reviewGrid" style="display:none;"></div>
+    </div>
+  </div>
+</section>
+
+<div class="cta-band reveal">
+  <div class="wrap">
+    <div>
+      <h2 class="headline">지금 전화하면 오늘 탈 수 있어요</h2>
+      <p>단체·기업 워크샵은 인원과 희망일만 알려주시면 안내해드립니다.</p>
+    </div>
+    <div class="cta-actions">
+      <a class="cta-phone" href="tel:01097596665" data-bind-tel data-bind="phone">010-9759-6665</a>
+    </div>
+  </div>
+</div>
+
+<footer id="contact">
+  <div class="wrap">
+    <div>
+      <div class="footer-brand">거제도팡팡<span>GEOJEPANGPANG</span></div>
+      <div class="footer-meta"><span data-bind="address">경상남도 거제시 일운면 거제대로 2660</span> · <span data-bind="phone">010-9759-6665</span><br>운영 시간은 전화 문의 시 안내해드립니다</div>
+    </div>
+    <div class="footer-links">
+      <span>이용약관</span><span>개인정보처리방침</span><span>안전규정</span>
+    </div>
+  </div>
+</footer>
+
+<div class="mobile-bar">
+  <a href="tel:01097596665" data-bind-tel>📞 전화 문의하기</a>
+</div>
+
+
+<script>
+/* header + mobile nav */
+const header = document.getElementById('siteHeader');
+window.addEventListener('scroll', () => {
+  header.classList.toggle('scrolled', window.scrollY > 40);
+});
+
+const navToggle = document.getElementById('navToggle');
+const mobileNav = document.getElementById('mobileNav');
+const mobileNavClose = document.getElementById('mobileNavClose');
+navToggle.addEventListener('click', () => mobileNav.classList.add('open'));
+mobileNavClose.addEventListener('click', () => mobileNav.classList.remove('open'));
+mobileNav.querySelectorAll('a').forEach(a => a.addEventListener('click', () => mobileNav.classList.remove('open')));
+
+/* reveal on scroll */
+const revealEls = document.querySelectorAll('.reveal');
+const io = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) entry.target.classList.add('in');
+  });
+}, { threshold: 0.15 });
+revealEls.forEach(el => io.observe(el));
+
+/* ---- dynamic content (editable via /admin) ---- */
+const chipRow = document.getElementById('chipRow');
+const programPhoto = document.getElementById('programPhoto');
+const programEn = document.getElementById('programEn');
+const programName = document.getElementById('programName');
+const programDesc = document.getElementById('programDesc');
+const programTags = document.getElementById('programTags');
+
+let PROGRAMS = [];
+
+function renderProgram(i){
+  const p = PROGRAMS[i];
+  if (!p) return;
+  programPhoto.innerHTML = p.photo
+    ? `<img src="${p.photo}" alt="${p.name}" style="width:100%;height:100%;object-fit:cover;display:block;">`
+    : `<div class="ph" style="position:absolute;inset:0;">${p.name} 사진</div>`;
+  programEn.textContent = p.en;
+  programName.textContent = p.name;
+  programDesc.textContent = p.desc;
+  programTags.innerHTML = p.tags.map(t => `<span>${t}</span>`).join('');
+  [...chipRow.children].forEach((chip, idx) => chip.classList.toggle('active', idx === i));
+}
+
+function setPhone(phone){
+  const digits = phone.replace(/[^0-9]/g, '');
+  document.querySelectorAll('[data-bind="phone"]').forEach(el => el.textContent = phone);
+  document.querySelectorAll('[data-bind-tel]').forEach(el => el.setAttribute('href', 'tel:' + digits));
+}
+function setText(sel, value){ document.querySelectorAll(sel).forEach(el => el.textContent = value); }
+function setHTML(sel, value){ document.querySelectorAll(sel).forEach(el => el.innerHTML = value); }
+function setImg(id, src){ const el = document.getElementById(id); if (el && src) el.src = src; }
+
+function extractYouTubeId(url){
+  if (!url) return null;
+  const m = String(url).match(/(?:youtube\.com\/(?:watch\?v=|shorts\/|embed\/)|youtu\.be\/)([A-Za-z0-9_-]{11})/);
+  return m ? m[1] : null;
+}
+function applyHeroMode(c){
+  const wrap = document.getElementById('heroVideoWrap');
+  const heroImgEl = document.getElementById('heroImg');
+  if (!wrap || !heroImgEl) return;
+  const id = c.heroMode === 'video' ? extractYouTubeId(c.heroVideoUrl) : null;
+  // heroImg stays visible either way — it's the fallback layer under the video,
+  // so if the video fails to load on some device/browser, the photo still shows
+  // instead of a blank background.
+  if (id) {
+    const origin = encodeURIComponent(location.origin);
+    wrap.innerHTML = `<iframe src="https://www.youtube-nocookie.com/embed/${id}?autoplay=1&mute=1&loop=1&playlist=${id}&controls=0&showinfo=0&rel=0&modestbranding=1&playsinline=1&iv_load_policy=3&origin=${origin}" title="거제도팡팡 소개 영상" allow="autoplay; encrypted-media; picture-in-picture"></iframe>`;
+    wrap.style.display = 'block';
+    sizeHeroVideo();
+  } else {
+    wrap.style.display = 'none';
+    wrap.innerHTML = '';
+  }
+}
+
+/* Size the hero video iframe in JS (not vw/vh) so it always exactly covers
+   the hero box and keeps a true 16:9 picture — the hero's own height on
+   mobile isn't a clean 100vh (text pushes it taller), so pure viewport-unit
+   math drifts out of ratio there. */
+function sizeHeroVideo(){
+  const wrap = document.getElementById('heroVideoWrap');
+  const iframe = wrap && wrap.querySelector('iframe');
+  if (!iframe) return;
+  const w = wrap.clientWidth, h = wrap.clientHeight;
+  if (!w || !h) return;
+  const targetRatio = 16 / 9;
+  let iw, ih;
+  if (w / h > targetRatio) { iw = w; ih = w / targetRatio; }
+  else { ih = h; iw = h * targetRatio; }
+  iframe.style.width = iw + 'px';
+  iframe.style.height = ih + 'px';
+}
+window.addEventListener('resize', sizeHeroVideo);
+window.addEventListener('orientationchange', () => setTimeout(sizeHeroVideo, 200));
+
+function applyContent(c){
+  if (c.phone) setPhone(c.phone);
+  if (c.address) setText('[data-bind="address"]', c.address);
+  if (c.heroBadge) setText('#heroBadge', c.heroBadge);
+  if (Array.isArray(c.heroHeadlineLines)) setHTML('#heroHeadline', c.heroHeadlineLines.join('<br>'));
+  if (c.heroSubtext) setText('#heroSubtext', c.heroSubtext);
+  if (c.gallerySubtitle) setText('#gallerySubtitle', c.gallerySubtitle);
+  setImg('heroImg', c.heroImage);
+  setImg('visitImg', c.visitPhoto);
+  setImg('qrImg', c.qrPhoto);
+  applyHeroMode(c);
+
+  if (Array.isArray(c.marquee) && c.marquee.length) {
+    const html = c.marquee.map(t => `<span>${t}</span>`).join('');
+    document.querySelectorAll('.marquee-set').forEach(set => { set.innerHTML = html; });
+  }
+
+  if (Array.isArray(c.programs) && c.programs.length) {
+    PROGRAMS = c.programs;
+    chipRow.innerHTML = '';
+    PROGRAMS.forEach((p, i) => {
+      const chip = document.createElement('button');
+      chip.type = 'button';
+      chip.className = 'chip' + (i === 0 ? ' active' : '');
+      chip.textContent = p.name;
+      chip.addEventListener('click', () => renderProgram(i));
+      chipRow.appendChild(chip);
+    });
+    renderProgram(0);
+  }
+
+  if (Array.isArray(c.gallery)) {
+    c.gallery.slice(0, 5).forEach((src, i) => {
+      const slot = document.getElementById('gallerySlot' + i);
+      if (!slot) return;
+      if (src) slot.innerHTML = `<img src="${src}" alt="거제도팡팡 갤러리 사진 ${i + 1}">`;
+    });
+  }
+
+  if (Array.isArray(c.reviews) && c.reviews.length) {
+    const reviewEmpty = document.getElementById('reviewEmpty');
+    const reviewGrid = document.getElementById('reviewGrid');
+    reviewEmpty.style.display = 'none';
+    reviewGrid.style.display = 'grid';
+    reviewGrid.innerHTML = c.reviews.map(r => {
+      const rating = Math.max(1, Math.min(5, Number(r.rating) || 5));
+      const stars = '★'.repeat(rating) + '☆'.repeat(5 - rating);
+      const author = escapeHTML(r.author || '고객');
+      const text = escapeHTML(r.text || '');
+      const date = escapeHTML(r.date || '');
+      return `<div class="review-card"><div class="stars">${stars}</div><p class="review-text">${text}</p><div class="review-meta"><span>${author}</span><span>${date}</span></div></div>`;
+    }).join('');
+  }
+}
+
+function escapeHTML(s){ return String(s || '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+
+fetch('content.json', { cache: 'no-store' })
+  .then(r => { if (!r.ok) throw new Error('content.json ' + r.status); return r.json(); })
+  .then(applyContent)
+  .catch(err => console.warn('content.json load failed:', err));
+</script>
+</body>
+</html>

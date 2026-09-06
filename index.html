@@ -112,12 +112,15 @@ img{max-width:100%;display:block;}
 }
 .hero h1{
   margin:18px 0 0;font-size:clamp(38px,6.5vw,88px);line-height:1.05;color:#fff;max-width:900px;
+  text-shadow:0 2px 16px rgba(0,10,20,.5);
 }
 .hero p{
   margin:24px 0 0;max-width:560px;font-size:17px;font-weight:500;line-height:1.85;color:rgba(255,255,255,.85);
+  text-shadow:0 1px 10px rgba(0,10,20,.45);
 }
 .hero-tags{
   margin-top:14px;font-family:Anton,sans-serif;font-size:11.5px;letter-spacing:.18em;color:var(--blue-light);
+  text-shadow:0 1px 10px rgba(0,10,20,.45);
 }
 .hero-bar{
   position:absolute;left:0;right:0;bottom:0;min-height:96px;background:rgba(255,255,255,.97);
@@ -207,8 +210,10 @@ img{max-width:100%;display:block;}
 .g3{grid-column:span 1;grid-row:span 1;}
 .g4{grid-column:span 1;grid-row:span 1;}
 .g5{grid-column:span 2;grid-row:span 1;}
+.gallery-grid > div{position:relative;overflow:hidden;}
+.gallery-grid img{width:100%;height:100%;object-fit:cover;display:block;border-radius:14px;}
 
-/* ---- reviews (honest placeholder, no fabricated testimonials) ---- */
+/* ---- reviews (owner-submitted, real reviews only) ---- */
 .reviews{background:var(--bg-page);padding:80px 0;}
 .review-empty{
   margin-top:26px;background:#fff;border-radius:20px;padding:56px 40px;text-align:center;
@@ -218,6 +223,15 @@ img{max-width:100%;display:block;}
 .review-empty a{
   display:inline-block;margin-top:20px;font-size:13px;font-weight:500;color:var(--blue);
   border-bottom:1.5px solid var(--blue);padding-bottom:2px;
+}
+.review-grid{margin-top:26px;display:grid;grid-template-columns:repeat(3,1fr);gap:16px;}
+.review-card{background:#fff;border-radius:18px;padding:26px 24px;}
+.review-card .stars{font-size:14px;color:#FFB300;letter-spacing:2px;}
+.review-card .review-text{margin:14px 0 0;font-size:13.5px;line-height:1.8;color:var(--muted);}
+.review-card .review-meta{margin-top:16px;font-size:12px;font-weight:700;color:var(--navy);display:flex;justify-content:space-between;align-items:center;gap:8px;}
+.review-card .review-meta span:last-child{font-weight:500;color:var(--muted-soft);}
+@media (max-width:860px){
+  .review-grid{grid-template-columns:1fr;}
 }
 
 /* ---- cta band ---- */
@@ -264,7 +278,8 @@ footer .wrap{padding:0;display:flex;justify-content:space-between;align-items:fl
   .nav-desktop{display:none;}
   .nav-toggle{display:block;}
   .hero{height:auto;min-height:100vh;padding-bottom:210px;}
-  .hero-content{position:static;padding:150px 20px 0;pointer-events:auto;}
+  .hero-content{position:relative;z-index:2;bottom:auto;padding:150px 20px 0;pointer-events:auto;}
+  .hero-overlay{background:linear-gradient(180deg,rgba(0,26,46,.7) 0%,rgba(0,26,46,.6) 40%,rgba(0,26,46,.55) 60%,rgba(0,26,46,.9) 100%);}
   .hero h1{max-width:100%;}
   .hero-bar{position:static;flex-direction:column;align-items:flex-start;margin-top:36px;}
   .hero-bar-info{flex-direction:column;align-items:flex-start;gap:14px;}
@@ -415,12 +430,12 @@ footer .wrap{padding:0;display:flex;justify-content:space-between;align-items:fl
       </div>
       <p id="gallerySubtitle">사진은 잠시 보류 중입니다 (업로드 예정)</p>
     </div>
-    <div class="gallery-grid">
-      <div class="ph g1">사진 1</div>
-      <div class="ph g2">사진 2</div>
-      <div class="ph g3">사진 3</div>
-      <div class="ph g4">사진 4</div>
-      <div class="ph g5">사진 5</div>
+    <div class="gallery-grid" id="galleryGrid">
+      <div class="ph g1" id="gallerySlot0">사진 1</div>
+      <div class="ph g2" id="gallerySlot1">사진 2</div>
+      <div class="ph g3" id="gallerySlot2">사진 3</div>
+      <div class="ph g4" id="gallerySlot3">사진 4</div>
+      <div class="ph g5" id="gallerySlot4">사진 5</div>
     </div>
   </div>
 </section>
@@ -433,10 +448,13 @@ footer .wrap{padding:0;display:flex;justify-content:space-between;align-items:fl
         <h2 class="headline">다녀간 분들의 후기</h2>
       </div>
     </div>
-    <div class="review-empty">
-      <div class="stars">★★★★★</div>
-      <p>아직 등록된 후기가 없어요. 다녀가신 분들의 소중한 후기가 이곳에 하나씩 채워질 예정입니다.</p>
-      <a href="#contact">지금 예약하고 첫 후기를 남겨보세요 →</a>
+    <div id="reviewsArea">
+      <div class="review-empty" id="reviewEmpty">
+        <div class="stars">★★★★★</div>
+        <p>아직 등록된 후기가 없어요. 다녀가신 분들의 소중한 후기가 이곳에 하나씩 채워질 예정입니다.</p>
+        <a href="#contact">지금 예약하고 첫 후기를 남겨보세요 →</a>
+      </div>
+      <div class="review-grid" id="reviewGrid" style="display:none;"></div>
     </div>
   </div>
 </section>
@@ -554,7 +572,32 @@ function applyContent(c){
     });
     renderProgram(0);
   }
+
+  if (Array.isArray(c.gallery)) {
+    c.gallery.slice(0, 5).forEach((src, i) => {
+      const slot = document.getElementById('gallerySlot' + i);
+      if (!slot) return;
+      if (src) slot.innerHTML = `<img src="${src}" alt="거제도팡팡 갤러리 사진 ${i + 1}">`;
+    });
+  }
+
+  if (Array.isArray(c.reviews) && c.reviews.length) {
+    const reviewEmpty = document.getElementById('reviewEmpty');
+    const reviewGrid = document.getElementById('reviewGrid');
+    reviewEmpty.style.display = 'none';
+    reviewGrid.style.display = 'grid';
+    reviewGrid.innerHTML = c.reviews.map(r => {
+      const rating = Math.max(1, Math.min(5, Number(r.rating) || 5));
+      const stars = '★'.repeat(rating) + '☆'.repeat(5 - rating);
+      const author = escapeHTML(r.author || '고객');
+      const text = escapeHTML(r.text || '');
+      const date = escapeHTML(r.date || '');
+      return `<div class="review-card"><div class="stars">${stars}</div><p class="review-text">${text}</p><div class="review-meta"><span>${author}</span><span>${date}</span></div></div>`;
+    }).join('');
+  }
 }
+
+function escapeHTML(s){ return String(s || '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
 
 fetch('content.json', { cache: 'no-store' })
   .then(r => { if (!r.ok) throw new Error('content.json ' + r.status); return r.json(); })

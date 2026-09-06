@@ -138,10 +138,20 @@ button{cursor:pointer;font-family:inherit;}
     </div>
   </div>
 
-  <div class="section-title">갤러리</div>
+  <div class="section-title">갤러리 (거제도팡팡의 순간들)</div>
   <div class="card">
     <label>갤러리 안내 문구</label>
     <input type="text" id="f_gallery">
+    <label>갤러리 사진 (최대 5장)</label>
+    <div id="galleryPhotos"></div>
+    <div class="hint">사진을 다 채우지 않아도 괜찮아요. 채운 칸만 사이트에 보여요.</div>
+  </div>
+
+  <div class="section-title">고객 후기</div>
+  <div class="card">
+    <div id="reviewsList"></div>
+    <button type="button" class="add-btn" onclick="addReview()">+ 후기 추가</button>
+    <div class="hint">실제로 받은 후기만 올려주세요. 별점은 1~5개를 선택할 수 있어요.</div>
   </div>
 
   <div class="savebar">
@@ -298,8 +308,88 @@ function fillForm(){
 
   if (!Array.isArray(CONTENT.marquee)) CONTENT.marquee = [];
   if (!Array.isArray(CONTENT.programs)) CONTENT.programs = [];
+  if (!Array.isArray(CONTENT.gallery)) CONTENT.gallery = [];
+  while (CONTENT.gallery.length < 5) CONTENT.gallery.push(null);
+  if (!Array.isArray(CONTENT.reviews)) CONTENT.reviews = [];
   renderMarquee();
   renderPrograms();
+  renderGalleryPhotos();
+  renderReviews();
+}
+
+/* ---- gallery photos ---- */
+function renderGalleryPhotos(){
+  const wrap = $('galleryPhotos');
+  wrap.innerHTML = '';
+  for (let i = 0; i < 5; i++) {
+    const photo = CONTENT.gallery[i];
+    const imgId = 'gal_img_' + i;
+    const phId = 'gal_ph_' + i;
+    const fileId = 'gal_file_' + i;
+    const row = document.createElement('div');
+    row.className = 'photo-row';
+    row.innerHTML = `
+      <img id="${imgId}" style="${photo ? '' : 'display:none;'}" src="${photo || ''}">
+      <div class="noimg" id="${phId}" style="${photo ? 'display:none;' : ''}">사진 ${i + 1}</div>
+      <button type="button" class="btn-file">사진 선택</button>
+      <input type="file" id="${fileId}" accept="image/*" style="display:none;">
+      ${photo ? `<button type="button" class="btn-remove" data-gal-remove="${i}">사진 삭제</button>` : ''}
+    `;
+    row.querySelector('.btn-file').addEventListener('click', () => row.querySelector('#' + fileId).click());
+    const removeBtn = row.querySelector('[data-gal-remove]');
+    if (removeBtn) removeBtn.addEventListener('click', () => { CONTENT.gallery[i] = null; renderGalleryPhotos(); });
+    wrap.appendChild(row);
+    wirePhotoInput(fileId, imgId, phId, 1200, (dataUrl) => { CONTENT.gallery[i] = dataUrl; });
+  }
+}
+
+/* ---- reviews ---- */
+function addReview(){
+  CONTENT.reviews.unshift({ author: '', rating: 5, text: '', date: '' });
+  renderReviews();
+}
+function renderReviews(){
+  const wrap = $('reviewsList');
+  wrap.innerHTML = '';
+  if (!CONTENT.reviews.length) {
+    wrap.innerHTML = '<div class="hint">아직 추가된 후기가 없어요.</div>';
+    return;
+  }
+  CONTENT.reviews.forEach((r, i) => {
+    const card = document.createElement('div');
+    card.className = 'program-card';
+    const ratingOptions = [5,4,3,2,1].map(n => `<option value="${n}" ${Number(r.rating)===n?'selected':''}>${'★'.repeat(n)}${'☆'.repeat(5-n)}</option>`).join('');
+    card.innerHTML = `
+      <div class="row">
+        <div>
+          <label>작성자</label>
+          <input type="text" data-k="author" value="${escapeAttr(r.author)}" placeholder="예: 김OO">
+        </div>
+        <div>
+          <label>별점</label>
+          <select data-k="rating" style="width:100%;padding:10px 12px;border:1px solid var(--line);border-radius:8px;font-size:14px;">${ratingOptions}</select>
+        </div>
+      </div>
+      <label>후기 내용</label>
+      <textarea data-k="text" placeholder="실제 받은 후기 내용을 그대로 옮겨주세요">${escapeHTML(r.text)}</textarea>
+      <label>날짜 (선택)</label>
+      <input type="text" data-k="date" value="${escapeAttr(r.date)}" placeholder="예: 2026.08">
+      <div style="margin-top:12px;">
+        <button type="button" class="btn-remove" data-review-remove="${i}">이 후기 삭제</button>
+      </div>
+    `;
+    card.querySelectorAll('[data-k]').forEach(el => {
+      el.addEventListener('input', () => {
+        const k = el.getAttribute('data-k');
+        CONTENT.reviews[i][k] = k === 'rating' ? Number(el.value) : el.value;
+      });
+    });
+    card.querySelector('[data-review-remove]').addEventListener('click', () => {
+      CONTENT.reviews.splice(i, 1);
+      renderReviews();
+    });
+    wrap.appendChild(card);
+  });
 }
 
 $('f_phone').addEventListener('input', e => CONTENT.phone = e.target.value);

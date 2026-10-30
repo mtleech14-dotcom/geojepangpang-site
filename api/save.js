@@ -27,6 +27,11 @@ function isValidContent(c) {
   if (!Array.isArray(c.programs)) return false;
   if (!Array.isArray(c.marquee)) return false;
   if (typeof c.phone !== 'string' || typeof c.address !== 'string') return false;
+  if ('gallery' in c && !Array.isArray(c.gallery)) return false;
+  if ('reviews' in c && !Array.isArray(c.reviews)) return false;
+  if ('notices' in c && !Array.isArray(c.notices)) return false;
+  if ('heroMode' in c && typeof c.heroMode !== 'string') return false;
+  if ('heroVideoUrl' in c && typeof c.heroVideoUrl !== 'string') return false;
   return true;
 }
 

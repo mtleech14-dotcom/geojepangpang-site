@@ -253,6 +253,18 @@ img{max-width:100%;display:block;}
   .review-grid{grid-template-columns:1fr;}
 }
 
+/* ---- notices ---- */
+.notices{background:var(--bg-page);padding:60px 0 10px;}
+.notice-list{margin-top:26px;display:flex;flex-direction:column;gap:14px;}
+.notice-card{background:#fff;border-radius:16px;padding:22px 26px;border-left:4px solid var(--blue);}
+.notice-card .notice-top{display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:wrap;}
+.notice-card .notice-title{font-size:15.5px;font-weight:700;color:var(--navy);}
+.notice-card .notice-date{font-size:12px;font-weight:600;color:var(--muted-soft);white-space:nowrap;}
+.notice-card .notice-text{margin:10px 0 0;font-size:13.5px;line-height:1.8;color:var(--muted);white-space:pre-line;}
+@media (max-width:600px){
+  .notice-card{padding:18px 20px;}
+}
+
 /* ---- cta band ---- */
 .cta-band{background:var(--blue);padding:66px 44px;}
 .cta-band .wrap{
@@ -335,6 +347,7 @@ footer .wrap{padding:0;display:flex;justify-content:space-between;align-items:fl
   </a>
   <nav class="nav-desktop">
     <div class="nav-links">
+      <a href="#notices" class="nav-notice-link" style="display:none;">공지사항</a>
       <a href="#programs">프로그램</a>
       <a href="#visit">시설·오시는 길</a>
       <a href="#gallery">갤러리</a>
@@ -351,6 +364,7 @@ footer .wrap{padding:0;display:flex;justify-content:space-between;align-items:fl
     <span class="brand-name"><b>거제도팡팡</b><span>GEOJEPANGPANG</span></span>
     <button class="mobile-nav-close" id="mobileNavClose" aria-label="메뉴 닫기">&times;</button>
   </div>
+  <a href="#notices" class="nav-notice-link" style="display:none;">공지사항</a>
   <a href="#programs">프로그램</a>
   <a href="#visit">시설·오시는 길</a>
   <a href="#gallery">갤러리</a>
@@ -404,6 +418,18 @@ footer .wrap{padding:0;display:flex;justify-content:space-between;align-items:fl
     </div>
   </div>
 </div>
+
+<section class="notices" id="notices" style="display:none;">
+  <div class="wrap">
+    <div class="section-head">
+      <div>
+        <div class="eyebrow">NOTICE</div>
+        <h2 class="headline">공지사항</h2>
+      </div>
+    </div>
+    <div class="notice-list" id="noticeList"></div>
+  </div>
+</section>
 
 <section class="programs reveal" id="programs">
   <div class="wrap">
@@ -684,6 +710,23 @@ function applyContent(c){
       const date = escapeHTML(r.date || '');
       return `<div class="review-card"><div class="stars">${stars}</div><p class="review-text">${text}</p><div class="review-meta"><span>${author}</span><span>${date}</span></div></div>`;
     }).join('');
+  }
+
+  if (Array.isArray(c.notices) && c.notices.length) {
+    const noticesSection = document.getElementById('notices');
+    const noticeList = document.getElementById('noticeList');
+    noticesSection.style.display = '';
+    noticeList.innerHTML = c.notices.map(n => {
+      const title = escapeHTML(n.title || '');
+      const text = escapeHTML(n.text || '');
+      const date = escapeHTML(n.date || '');
+      return `<div class="notice-card"><div class="notice-top"><div class="notice-title">${title}</div><div class="notice-date">${date}</div></div>${text ? `<p class="notice-text">${text}</p>` : ''}</div>`;
+    }).join('');
+    document.querySelectorAll('.nav-notice-link').forEach(el => { el.style.display = ''; });
+  } else {
+    const noticesSection = document.getElementById('notices');
+    if (noticesSection) noticesSection.style.display = 'none';
+    document.querySelectorAll('.nav-notice-link').forEach(el => { el.style.display = 'none'; });
   }
 }
 

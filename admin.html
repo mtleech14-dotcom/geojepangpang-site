@@ -173,6 +173,13 @@ button{cursor:pointer;font-family:inherit;}
     <div class="hint">사진을 다 채우지 않아도 괜찮아요. 채운 칸만 사이트에 보여요.</div>
   </div>
 
+  <div class="section-title">공지사항</div>
+  <div class="card">
+    <div id="noticesList"></div>
+    <button type="button" class="add-btn" onclick="addNotice()">+ 공지 추가</button>
+    <div class="hint">휴무, 기상 악화, 이벤트 등 손님께 바로 알리고 싶은 소식을 올려주세요. 공지가 하나도 없으면 사이트에서 이 영역은 자동으로 숨겨져요.</div>
+  </div>
+
   <div class="section-title">고객 후기</div>
   <div class="card">
     <div id="reviewsList"></div>
@@ -344,10 +351,12 @@ function fillForm(){
   if (!Array.isArray(CONTENT.gallery)) CONTENT.gallery = [];
   while (CONTENT.gallery.length < 5) CONTENT.gallery.push(null);
   if (!Array.isArray(CONTENT.reviews)) CONTENT.reviews = [];
+  if (!Array.isArray(CONTENT.notices)) CONTENT.notices = [];
   renderMarquee();
   renderPrograms();
   renderGalleryPhotos();
   renderReviews();
+  renderNotices();
 }
 
 /* ---- gallery photos ---- */
@@ -420,6 +429,45 @@ function renderReviews(){
     card.querySelector('[data-review-remove]').addEventListener('click', () => {
       CONTENT.reviews.splice(i, 1);
       renderReviews();
+    });
+    wrap.appendChild(card);
+  });
+}
+
+/* ---- notices ---- */
+function addNotice(){
+  CONTENT.notices.unshift({ title: '', text: '', date: '' });
+  renderNotices();
+}
+function renderNotices(){
+  const wrap = $('noticesList');
+  wrap.innerHTML = '';
+  if (!CONTENT.notices.length) {
+    wrap.innerHTML = '<div class="hint">아직 추가된 공지사항이 없어요.</div>';
+    return;
+  }
+  CONTENT.notices.forEach((n, i) => {
+    const card = document.createElement('div');
+    card.className = 'program-card';
+    card.innerHTML = `
+      <label>제목</label>
+      <input type="text" data-k="title" value="${escapeAttr(n.title)}" placeholder="예: 10/31(금) 기상 악화로 임시 휴무">
+      <label>내용 (선택)</label>
+      <textarea data-k="text" placeholder="자세한 안내가 필요하면 적어주세요">${escapeHTML(n.text)}</textarea>
+      <label>날짜 (선택)</label>
+      <input type="text" data-k="date" value="${escapeAttr(n.date)}" placeholder="예: 2026.10.30">
+      <div style="margin-top:12px;">
+        <button type="button" class="btn-remove" data-notice-remove="${i}">이 공지 삭제</button>
+      </div>
+    `;
+    card.querySelectorAll('[data-k]').forEach(el => {
+      el.addEventListener('input', () => {
+        CONTENT.notices[i][el.getAttribute('data-k')] = el.value;
+      });
+    });
+    card.querySelector('[data-notice-remove]').addEventListener('click', () => {
+      CONTENT.notices.splice(i, 1);
+      renderNotices();
     });
     wrap.appendChild(card);
   });
